@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>openwrt加载8187L外接网卡做中继 | chenxyzy的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上网环境：RG100A刷openwrt backfire 10.03.1-rc4加载8187L外接网卡做中继，很稳定，在线看视频也没有掉线，两台电脑连接。 以前一直用openwrt官网集成的10.03中文固件，加载8187L外接网卡做中继，可是不稳定，用了不久就掉线，不知跟中文版有没有原因，据说有些问题是中文版特有的，我也不太清楚，现在换了固件，刷官方英文原版backfire 10.03.1-rc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openwrt加载8187L外接网卡做中继">
+<meta property="og:url" content="http://example.com/2021/07/21/openwrt%E5%8A%A0%E8%BD%BD8187L%E5%A4%96%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%81%9A%E4%B8%AD%E7%BB%A7/index.html">
+<meta property="og:site_name" content="chenxyzy的博客">
+<meta property="og:description" content="上网环境：RG100A刷openwrt backfire 10.03.1-rc4加载8187L外接网卡做中继，很稳定，在线看视频也没有掉线，两台电脑连接。 以前一直用openwrt官网集成的10.03中文固件，加载8187L外接网卡做中继，可是不稳定，用了不久就掉线，不知跟中文版有没有原因，据说有些问题是中文版特有的，我也不太清楚，现在换了固件，刷官方英文原版backfire 10.03.1-rc">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-21T08:00:21.000Z">
+<meta property="article:modified_time" content="2021-07-21T08:02:41.410Z">
+<meta property="article:author" content="xiangyu chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="chenxyzy的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">chenxyzy的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-openwrt加载8187L外接网卡做中继" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/openwrt%E5%8A%A0%E8%BD%BD8187L%E5%A4%96%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%81%9A%E4%B8%AD%E7%BB%A7/" class="article-date">
+  <time datetime="2021-07-21T08:00:21.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      openwrt加载8187L外接网卡做中继
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上网环境：RG100A刷openwrt backfire 10.03.1-rc4加载8187L外接网卡做中继，很稳定，在线看视频也没有掉线，两台电脑连接。</p>
+<p>以前一直用openwrt官网集成的10.03中文固件，加载8187L外接网卡做中继，可是不稳定，用了不久就掉线，不知跟中文版有没有原因，据说有些问题是中文版特有的，我也不太清楚，现在换了固件，刷官方英文原版backfire 10.03.1-rc4固件，再加载8187L网卡试试，挺稳定的，8187L的大功率做接收，路由自带网卡做ap，可以说是完美的中继，下面说说步骤。<br>官网固件，我刷第一个</p>
+<p>首先是刷固件，我直接在原来的openwrt上web升级的，原版openwrt固件只集成基本的应用，要想加载8187L做中继需要安装部分应用<br>安装USB应用和8187L网卡驱动<br>    安装方法一：在线安装<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用PuTTY登录路由，输入下面命令</span><br><span class="line">opkg update</span><br><span class="line">opkg install kmod-eeprom-93cx6_2.6.32.25-1_brcm63xx.ipk </span><br><span class="line">opkg install kmod-nls-base_2.6.32.25-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-rtl8187_2.6.32.25+2010-10-19-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-usb-core_2.6.32.25-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-usb-ohci_2.6.32.25-1_brcm63xx.ipk</span><br></pre></td></tr></table></figure><br>    安装方法二：离线安装<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">先下载以上的5个ipk包，用WinScp上传到路由的tmp文件夹</span><br><span class="line">然后用PuTTY登录路由，输入下面命令</span><br><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line">opkg install kmod-eeprom-93cx6_2.6.32.25-1_brcm63xx.ipk </span><br><span class="line">opkg install kmod-nls-base_2.6.32.25-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-usb-core_2.6.32.25-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-usb-core_2.6.32.25-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-usb-ohci_2.6.32.25-1_brcm63xx.ipk</span><br></pre></td></tr></table></figure><br>组件安装完毕，下面开始配置：<br>配置network，用WinScp登录路由修改<br>etc/config的network，只需修改lan和wan1，其他的不用管，修改如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">config &#x27;switch&#x27; &#x27;eth1&#x27;</span><br><span class="line">option &#x27;reset&#x27; &#x27;1&#x27;</span><br><span class="line">option &#x27;enable_vlan&#x27; &#x27;1&#x27;</span><br><span class="line">config &#x27;switch_vlan&#x27;</span><br><span class="line">option &#x27;device&#x27; &#x27;eth1&#x27;</span><br><span class="line">option &#x27;vlan&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;ports&#x27; &#x27;0 1 2 5*&#x27;</span><br><span class="line">config &#x27;switch_vlan&#x27;</span><br><span class="line">option &#x27;device&#x27; &#x27;eth1&#x27;</span><br><span class="line">option &#x27;vlan&#x27; &#x27;1&#x27;</span><br><span class="line">option &#x27;ports&#x27; &#x27;3 5*&#x27;</span><br><span class="line">config &#x27;interface&#x27; &#x27;loopback&#x27;</span><br><span class="line">option &#x27;ifname&#x27; &#x27;lo&#x27;</span><br><span class="line">option &#x27;proto&#x27; &#x27;static&#x27;</span><br><span class="line">option &#x27;ipaddr&#x27; &#x27;127.0.0.1&#x27;</span><br><span class="line">option &#x27;netmask&#x27; &#x27;255.0.0.0&#x27;</span><br><span class="line">config &#x27;interface&#x27; &#x27;lan&#x27;</span><br><span class="line">option &#x27;type&#x27; &#x27;bridge&#x27;</span><br><span class="line">option &#x27;ifname&#x27; &#x27;eth1.0&#x27;</span><br><span class="line">option &#x27;proto&#x27; &#x27;static&#x27;</span><br><span class="line">option &#x27;netmask&#x27; &#x27;255.255.255.0&#x27;</span><br><span class="line">option &#x27;nat&#x27; &#x27;1&#x27;</span><br><span class="line">option &#x27;ipaddr&#x27; &#x27;192.168.3.1&#x27;（lan网段要跟上级路由错开，此处为登录自己路由时的ip）</span><br><span class="line">config &#x27;interface&#x27; &#x27;wan&#x27;</span><br><span class="line">option &#x27;defaultroute&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;peerdns&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;proto&#x27; &#x27;dhcp&#x27;</span><br><span class="line">option &#x27;dns&#x27; &#x27;192.168.1.1&#x27;</span><br><span class="line">option &#x27;ifname&#x27; &#x27;eth1.1&#x27;</span><br><span class="line">config &#x27;interface&#x27; &#x27;wan1&#x27;</span><br><span class="line">option &#x27;ifname&#x27; &#x27;wlan1&#x27;</span><br><span class="line">option &#x27;defaultroute&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;peerdns&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;dns&#x27; &#x27;192.168.0.1&#x27;（上级路由DNS）</span><br><span class="line">option &#x27;proto&#x27; &#x27;static&#x27;          （静态ip）</span><br><span class="line">option &#x27;ipaddr&#x27; &#x27;192.168.0.110&#x27;（ipv4地址）</span><br><span class="line">option &#x27;netmask&#x27; &#x27;255.255.255.0&#x27;（子掩码）</span><br><span class="line">option &#x27;gateway&#x27; &#x27;192.168.0.1&#x27;（上级路由网关）</span><br><span class="line">配置完毕，保存退出。</span><br><span class="line">配置etc/config的wireless，修改如下：</span><br><span class="line">config &#x27;wifi-device&#x27; &#x27;radio0&#x27;（路由自带网卡）</span><br><span class="line">option &#x27;type&#x27; &#x27;mac80211&#x27;</span><br><span class="line">option &#x27;macaddr&#x27; &#x27;00:74:04:07:53:bb&#x27;</span><br><span class="line">option &#x27;hwmode&#x27; &#x27;11g&#x27;</span><br><span class="line">option &#x27;disabled&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;txpower&#x27; &#x27;20&#x27;</span><br><span class="line">option &#x27;channel&#x27; &#x27;11&#x27;</span><br><span class="line">config &#x27;wifi-iface&#x27;</span><br><span class="line">option &#x27;device&#x27; &#x27;radio0&#x27;</span><br><span class="line">option &#x27;encryption&#x27; &#x27;psk&#x27;（加密方式）</span><br><span class="line">option &#x27;key&#x27; &#x27;aa131698&#x27;（密码）</span><br><span class="line">option &#x27;ssid&#x27; &#x27;OpenWrt&#x27;（广播的SSID）</span><br><span class="line">option &#x27;network&#x27; &#x27;lan&#x27;</span><br><span class="line">option &#x27;mode&#x27; &#x27;ap&#x27;          （接入点模式）</span><br><span class="line">config &#x27;wifi-device&#x27; &#x27;radio1&#x27;（外接8187L网卡）</span><br><span class="line">option &#x27;type&#x27; &#x27;mac80211&#x27;</span><br><span class="line">option &#x27;macaddr&#x27; &#x27;00:e0:4c:92:cd:d6&#x27;（外接网卡MAC）</span><br><span class="line">option &#x27;hwmode&#x27; &#x27;11g&#x27;</span><br><span class="line">option &#x27;txpower&#x27; &#x27;20&#x27;</span><br><span class="line">option &#x27;channel&#x27; &#x27;1&#x27;（上级路由信道，必须要一致）</span><br><span class="line">option &#x27;disabled&#x27; &#x27;0&#x27;</span><br><span class="line">config &#x27;wifi-iface&#x27;</span><br><span class="line">option &#x27;device&#x27; &#x27;radio1&#x27;</span><br><span class="line">option &#x27;network&#x27; &#x27;wan1&#x27;</span><br><span class="line">option &#x27;mode&#x27; &#x27;sta&#x27;（客户端模式）</span><br><span class="line">option &#x27;encryption&#x27; &#x27;none&#x27;（上级路由加密方式）</span><br><span class="line">option &#x27;ssid&#x27; &#x27;Tenda_5056C8&#x27;（上级路由广播SSID）</span><br></pre></td></tr></table></figure>
+<p>保存，退出，重启路由就可以上网了。<br>重启完毕后会出现wan，wan1和radio0，radio1<br>wan对应的是lan4，wan1对应的是外接网卡接入，radio0对应的是路由自身的无线网卡，radio1对应的是外接网卡</p>
+<p>扫描到的信号</p>
+<p>可以上网了</p>
+<p>中继需要用到的软件包</p>
+<p>固件我就不上传了,给个链接,大家有兴趣的话可以去下载<a target="_blank" rel="noopener" href="http://downloads.openwrt.org/backfire/10.03.1-rc5/brcm63xx/">http://downloads.openwrt.org/backfire/10.03.1-rc5/brcm63xx/</a></p>
+<p>rc5界面变得更加好看和人性化了，安装luci-i18n-chinese可以实现中文化了，中继比rc4更好用，就是rc5的中继设置跟rc4有少少区别，呵呵，看有没有人感兴趣，多的话我再写rc5加载8187L做中继的教程，上面的连接我改为rc5的了，想下载rc4的话只要把连接上的rc5改为rc4就可以了，本教程适用于rc4，对于rc5，并不适用，上面给出的软件包适用于rc4固件，在rc5上我没有测试</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/openwrt%E5%8A%A0%E8%BD%BD8187L%E5%A4%96%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%81%9A%E4%B8%AD%E7%BB%A7/" data-id="ckre6al4b000kpkt46yoh3nhz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/21/iptables%E8%AE%BE%E7%BD%AE%E5%81%9Anat%E8%BD%AC%E5%8F%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          iptables设置做nat转发
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/21/vim%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vim基本命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/21/asar-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8C%85/">asar 打包和解包</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/">Xterm/Uxterm配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Windows-%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">Windows 一些问题处理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/linux-selinux%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9D%97%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">linux selinux手动编译模块相关命令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/zabbix-trigger%E7%9A%84%E5%9D%91/">zabbix trigger的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 xiangyu chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

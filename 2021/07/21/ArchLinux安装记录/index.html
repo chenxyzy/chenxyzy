@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ArchLinux安装记录 | chenxyzy的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="00000 archlinux 安装; 1,制作启动盘;我用的usb image tool制作的启动盘; 2,启动并分区格式化文件系统和挂载;    一，fdisk &#x2F;dev&#x2F;sda        Welcome to fdisk (util-linux 2.29.2).        Changes will remain in memory only, until you decide to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArchLinux安装记录">
+<meta property="og:url" content="http://example.com/2021/07/21/ArchLinux%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="chenxyzy的博客">
+<meta property="og:description" content="00000 archlinux 安装; 1,制作启动盘;我用的usb image tool制作的启动盘; 2,启动并分区格式化文件系统和挂载;    一，fdisk &#x2F;dev&#x2F;sda        Welcome to fdisk (util-linux 2.29.2).        Changes will remain in memory only, until you decide to">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-21T08:34:59.000Z">
+<meta property="article:modified_time" content="2021-07-21T08:35:48.731Z">
+<meta property="article:author" content="xiangyu chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="chenxyzy的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">chenxyzy的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ArchLinux安装记录" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/ArchLinux%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time datetime="2021-07-21T08:34:59.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ArchLinux安装记录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>00000 archlinux 安装;</p>
+<p>1,制作启动盘;我用的usb image tool制作的启动盘;</p>
+<p>2,启动并分区格式化文件系统和挂载;<br>    一，fdisk /dev/sda<br>        Welcome to fdisk (util-linux 2.29.2).<br>        Changes will remain in memory only, until you decide to write them.<br>        Be careful before using the write command.</p>
+<pre><code>    Command (m for help): n
+    Partition number (9-128, default 9):
+    First sector (334475056-1953525134, default 1286565888):
+    Last sector, +sectors or +size&#123;K,M,G,T,P&#125; (1286565888-1952501759, default 1952501759):+500M
+    Created a new partition 9 of type &#39;Linux filesystem&#39; and of size 500 MiB.
+    Command (m for help): n
+    Partition number (10-128, default 10):
+    First sector (334475056-1953525134, default 1287589888):
+    Last sector, +sectors or +size&#123;K,M,G,T,P&#125; (1287589888-1952501759, default 1952501759): +100G
+
+    Created a new partition 10 of type &#39;Linux filesystem&#39; and of size 100 GiB.
+
+    Command (m for help): n
+    Partition number (11-128, default 11):
+    First sector (334475056-1953525134, default 334475264):
+    Last sector, +sectors or +size&#123;K,M,G,T,P&#125; (334475264-900687871, default 900687871): +4G
+
+    Created a new partition 11 of type &#39;Linux filesystem&#39; and of size 4 GiB
+   
+    Command (m for help): t
+    Partition number (1-11, default 11):
+    Hex code (type L to list all codes): 19
+    Command (m for help): w
+   
+二，格式化文件系统：
+    mkfs.ext4 /dev/sda9
+    mkfs.xfs /dev/sda10
+    mkswap /dev/sda11
+   
+三，挂载文件系统：
+    mount /dev/sda10 /mnt
+    mkdir -p /mnt/boot/EFI
+    mount /dev/sda9 /boot
+    mount /dev/sda1 /mnt/boot/EFI
+    swapon /dev/sda11
+   
+</code></pre>
+<p>3,配置中科大的镜像源：<br>    vi /etc/pacman.d/mirrorlist<br>        ##<br>        ## Arch Linux repository mirrorlist<br>        ## Filtered by mirror score from mirror status page<br>        ## Generated on 2017-04-01<br>        ##<br>        Server = <a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch">http://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch</a></p>
+<pre><code>    ## Macedonia
+    Server = http://mirror.t-home.mk/archlinux/$repo/os/$arch
+    ## Canada
+    Server = http://mirror.frgl.pw/archlinux/$repo/os/$arch
+    ## South Korea
+    Server = http://mirror.premi.st/archlinux/$repo/os/$arch
+    ## Lithuania
+    Server = http://mirrors.atviras.lt/archlinux/$repo/os/$arch
+    ## Netherlands
+    Server = http://mirror.nl.leaseweb.net/archlinux/$repo/os/$arch
+    ## Czech Republic
+    Server = http://ftp.linux.cz/pub/linux/arch/$repo/os/$arch
+    ## United States
+    Server = http://mirror.umd.edu/archlinux/$repo/os/$arch
+    ## United States
+    Server = http://mirrors.lug.mtu.edu/archlinux/$repo/os/$arch
+    &quot;/etc/pacman.d/mirrorlist&quot; 510 lines, 18514 characters
+   
+   
+</code></pre>
+<p>3，安装基本的软件包：<br>    pacstrap /mnt base base-devel</p>
+<p>4，生成fstab：<br>    genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab</p>
+<p>5，切换根目录：<br>    arch-chroot /mnt /bin/bash</p>
+<p>6，设置语言编码：<br>    cat &gt;&gt; /etc/locale.gen &lt;&lt; EOF<br>    &gt;en_US.UTF-8 UTF-8<br>    &gt;zh_CN.UTF-8 UTF-8<br>    &gt;EOF</p>
+<pre><code>locale-gen
+
+echo LANG=en_US.UTF-8 &gt;&gt; /etc/locale.conf
+</code></pre>
+<p>7，设置时区：<br>    mv /etc/localtime /etc/localtime.old<br>    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</p>
+<p>8，设置主机名，配置网络：<br>    hostnamectl set-hostname ArchLinu<br>    systemctl enable dhcpcd.service</p>
+<p>9，生成initramfs：<br>    mkinitcpio -p linux</p>
+<p>10，安装grub：<br>    pacman -S grub os-prober efibootngr<br>    grub-install –efi-directory=/boot/EFI –bootloader-id=ArchLinu<br>    grub-mkconfig -o /boot/grub/grub.cfg</p>
+<p>11，安装基本软件包结束，退出当前根，卸载文件系统，并重启到archlinux：<br>    exit<br>    umount /mnt/boot/EFI<br>    umount /mn/boot<br>    umount /mnt<br>    shutdown -r 0</p>
+<p>12，安装xorg和显卡驱动：<br>    pacman -S nvidia xf86-video-intel 我的笔记本是nvidia的显卡，而且较新，340xx和304xx试过驱动不了<br>    这里用nvidia的配置工具生成的xorg.conf，启动X Windows直接死机;不配置就黑屏，解决办法是在家目录下的.xinitrc文件中加入：</p>
+<pre><code>    xrandr --setprovideroutputsource
+    modesetting NVIDIA-0
+    xrandr --auto   
+   
+    如果没有这个文件可以从/etc/X11/xinit/xinitrc复制到家目录的.xinitrc;   
+   
+pacman -S xorg-server xorg-xinit xorg-server-utils
+注意：X Windows启动依赖xterm：
+pacman -S xterm
+</code></pre>
+<p>13，安装openbox窗口程序和一些常用软件和组件：<br>    pacman -S openbox<br>    pacman -S scrot pcmanfm firefox acpi acpid acpi_call screenfetch gpicview xorg-fonts xorg-xdm wqy-microhei wqy-zenhei ttf-dejavu tint2 unzip sunpinyin pkgfile openssh opencl-nvidia ntfs-3g ntp menumaker mesa flashplugin fcitx fcitx-gtk2 fcitx-gtk3 fcitx-configtool fcitx-sunpinyin alsa-utils xf86-input-synaptics syslog-ng obconf</p>
+<p>14，更新字体;<br>    fc-cache</p>
+<p>15，配置输入法，在~/.xinitrc文件中加入：</p>
+<pre><code>cp /etc/xdg/autostart/fcitx-autostart.desktop ~/.config/autostart/
+
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+注意：要更新中文编码哟！不然不能切换中输入法;要在firefox中中文输入，就要安装fcitx-gtk2和fcitx-gtk3才可以;
+</code></pre>
+<p>16，startx自动启动openbox：<br>    在.xinitrc文件中加入：<br>        exec openbox-session</p>
+<p>17，美化,在~/.config/openbox/autostart加入<br>        exec fcitx &amp;<br>        exec pcmanfm –desktop &amp;<br>        exec tint2 &amp;</p>
+<pre><code>一，配置xterm复制粘贴：
+    如果家目录下没有.Xresources，可以复制一个过来：
+    cp /etc/X11/xdm/Xresources ~/.Xresources
+        /etc/X11/xdm/下没有这个文件的话：
+        pacman -S xorg-xdm
+       
+    在~/.Xresources文件中加入：
+        !Mouse selecting to copy,ctrl-v to paste
+        !Ctrl p to print screen content to file
+        XTerm*VT100.Translations: #override \
+        Ctrl &lt;KeyPress&gt; V: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+        &lt;BtnUp&gt;: select-end(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+        Ctrl &lt;KeyPress&gt; P: print() \n
+
+二，生成openbox菜单：
+    mmaker -vf Openbox3   
+   
+</code></pre>
+<p>图片</p>
+<hr>
+<p>2017-4-4补充：<br>昨晚上发现笔记本的触摸版不能单触选定，必选要按触摸板上的左击才行，这好生不爽;网上查了下资料：参考：<br>      <a target="_blank" rel="noopener" href="https://www.x.org/archive/current/doc/man/man1/xinput.1.xhtml">https://www.x.org/archive/current/doc/man/man1/xinput.1.xhtml</a><br>      <a target="_blank" rel="noopener" href="https://www.mankier.com/4/libinput#Note">https://www.mankier.com/4/libinput#Note</a><br>      <a target="_blank" rel="noopener" href="http://www.cnblogs.com/xiaozhang9/p/6157934.html">http://www.cnblogs.com/xiaozhang9/p/6157934.html</a></p>
+<p>主要的几个参数：</p>
+<p> ~]# xinput list-props 17<br>Device ‘FocalTechPS/2 FocalTech Touchpad’:<br>        Device Enabled (171):   1<br>        Coordinate Transformation Matrix (173): 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000</p>
+<pre><code>    libinput Tapping Enabled (323): 1
+    libinput Tapping Enabled Default (324): 0
+    libinput Tapping Drag Enabled (325):    1
+    libinput Tapping Drag Enabled Default (326):    1
+    libinput Tapping Drag Lock Enabled (327):       0
+    libinput Tapping Drag Lock Enabled Default (328):       0
+    libinput Tapping Button Mapping Enabled (329):  1, 0
+    libinput Tapping Button Mapping Default (330):  1, 0
+    libinput Accel Speed (305):     0.000000
+    libinput Accel Speed Default (306):     0.000000
+    libinput Natural Scrolling Enabled (310):       1
+    libinput Natural Scrolling Enabled Default (311):       0
+    libinput Send Events Modes Available (290):     1, 1
+    libinput Send Events Mode Enabled (291):        0, 0
+    libinput Send Events Mode Enabled Default (292):        0, 0
+    libinput Left Handed Enabled (312):     0
+    libinput Left Handed Enabled Default (313):     0
+    libinput Scroll Methods Available (314):        1, 1, 0
+    libinput Scroll Method Enabled (315):   1, 0, 0
+    libinput Scroll Method Enabled Default (316):   1, 0, 0
+    libinput Click Methods Available (331): 1, 1
+    libinput Click Method Enabled (332):    1, 0
+    libinput Click Method Enabled Default (333):    1, 0
+    libinput Middle Emulation Enabled (319):        0
+    libinput Middle Emulation Enabled Default (320):        0
+    libinput Disable While Typing Enabled (334):    1
+    libinput Disable While Typing Enabled Default (335):    1
+    Device Node (293):      &quot;/dev/input/event9&quot;
+    Device Product ID (294):        2, 18
+    libinput Drag Lock Buttons (321):       &lt;no items&gt;
+    libinput Horizontal Scroll Enabled (322):       1
+</code></pre>
+<p>libinput Tapping Enabled：是否启用触摸板，值为1或0;<br>libinput Tapping Enabled：是否打开轻触选定，双指轻触右击;值为1或0;<br>libinput Natural Scrolling Enabled：是否启用常规的滚动方式：值为1或0; 双指滑动;<br>libinput Accel Speed：调整鼠标指针移动的速度：值在-1.000000到1.000000之间;<br>libinput Tapping Drag Lock Enabled：是否启用拖拽：值为1或0;<br>libinput Tapping Drag Enabled：是否启用双击选定窗口;值为1或0;<br>libinput Tapping Button Mapping Enabled：我的理解是点击方法;值为0, 1时三指相当于右击，单击选定，双击呼出任务列表和桌面列表; 值为1, 0时，单击选定，双击相当于右击，三击呼出任务列表;<br>libinput Disable While Typing Enabled：打字是关闭检测触摸;值为1或0;<br>libinput Left Handed Enabled：左撇子模式：值为1或0;<br>libinput Scroll Method Enabled：是否启用滚动：值为100，启用;010为禁用;</p>
+<hr>
+<p>2017-7-1补充：<br>    蓝牙相关：<br>        pacman -S pulseaudio-bluetooth bluez bluez-utils<br>        usermod -a -G lp root<br>        systemctl start blurtooth.service<br>        bluetoothctl<br>           bluetooth# power on<br>           bluetooth# agent on<br>           bluetooth# default-agent<br>           bluetooth# scan on<br>           bluetooth# pair #+TAB键<br>           bluetooth# connect #+TAB键</p>
+<hr>
+<p>2021-7-11<br>Firefox无声音：<br>    Firefox 在linux上依赖pulseaudio;<br>    pacman -S pulseaudio</p>
+<pre><code>参考： https://support.mozilla.org/zh-CN/kb/%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91%E6%97%A0%E6%B3%95%E6%92%AD%E6%94%BE
+</code></pre>
+<p>Alsa系统声音相关：<br>    pacman -S alsa-utils</p>
+<pre><code>配置默认声卡：
+/etc/asound.conf or ~/.asoundrc
+
+defaults.ctl.card 2
+defaults.pcm.card 2
+defaults.timer.card 2
+后面的数字为声卡的索引
+</code></pre>
+<p>关闭独显：<br>    echo 1 &gt; /sys/bus/pci/devices/0000:01:00.0/remove<br>重新打开独显：<br>    echo 1 &gt; /sys/bus/pci/rescan<br>    PS: use root user</p>
+<p>调节显示屏亮度：<br>    echo 10 &gt; /sys/class/backlight/amdgpu_bl0/brightness<br>    PS: amdgpu_bl0可能会根据显卡的不同变化</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/ArchLinux%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" data-id="ckre6al3f0000pkt49r7s451o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/21/OpenStack%E5%88%A0%E9%99%A4%E5%83%B5%E5%B0%B8%E5%8D%B7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          OpenStack删除僵尸卷
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/21/Postgresql%E7%BC%96%E7%A0%81%E6%8A%A5%E9%94%99/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Postgresql编码报错</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/21/asar-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8C%85/">asar 打包和解包</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/">Xterm/Uxterm配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Windows-%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">Windows 一些问题处理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/linux-selinux%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9D%97%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">linux selinux手动编译模块相关命令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/zabbix-trigger%E7%9A%84%E5%9D%91/">zabbix trigger的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 xiangyu chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

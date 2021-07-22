@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>c4配置 | chenxyzy的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="配置主要需要修改gsnova.conf，以下针对各个PaaS平台部署后配置说明 C4修改gsnova.conf中[C4]以下部分，默认Enable为0，开启需要修改Enable为1： [C4] Enable&#x3D;1 WorkerNode[0]&#x3D;myapp.cloudfoundry.com将申请的域名填入WorkerNode[0]&#x3D;后，注意必须为域名，且在配置前请确保在浏览器中输入此域名能看到‘snov">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c4配置">
+<meta property="og:url" content="http://example.com/2021/07/21/c4%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="chenxyzy的博客">
+<meta property="og:description" content="配置主要需要修改gsnova.conf，以下针对各个PaaS平台部署后配置说明 C4修改gsnova.conf中[C4]以下部分，默认Enable为0，开启需要修改Enable为1： [C4] Enable&#x3D;1 WorkerNode[0]&#x3D;myapp.cloudfoundry.com将申请的域名填入WorkerNode[0]&#x3D;后，注意必须为域名，且在配置前请确保在浏览器中输入此域名能看到‘snov">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-21T07:52:26.000Z">
+<meta property="article:modified_time" content="2021-07-21T07:53:05.235Z">
+<meta property="article:author" content="xiangyu chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="chenxyzy的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">chenxyzy的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-c4配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/c4%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2021-07-21T07:52:26.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      c4配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>主要需要修改gsnova.conf，以下针对各个PaaS平台部署后配置说明</p>
+<p>C4<br>修改gsnova.conf中[C4]以下部分，默认Enable为0，开启需要修改Enable为1：</p>
+<p>[C4] Enable=1 WorkerNode[0]=myapp.cloudfoundry.com<br>将申请的域名填入WorkerNode[0]=后，注意必须为域名，且在配置前请确保在浏览器中输入此域名能看到‘snova’相关信息（证明部署服务端成功且能直接访问）。若有多个，可以如下配置多个：</p>
+<p>[C4] Enable=1 WorkerNode[0]=myapp1.cloudfoundry.comWorkerNode[1]=myapp2.cloudfoundry.com<br>域名前可以增加scheme指示连接协议类型， 默认为http， gsnova支持如下几种协议：</p>
+<p>WorkerNode[0]=<a target="_blank" rel="noopener" href="http://myapp1.cloudfoundry.com/">http://myapp1.cloudfoundry.com</a><br>WorkerNode[0]=<a target="_blank" rel="noopener" href="https://myapp1.cloudfoundry/">https://myapp1.cloudfoundry</a>.<br>comWorkerNode[0]=ws://myapp1.cloudfoundry.com //websocket， 服务端仅nodejs支持WorkerNode[0]=wss://myapp1.cloudfoundry.com //websocket over ssl， 服务端仅nodejs支持<br>此Proxy实现在SPAC中名称为C4, 若想只用C4作为唯一的Proxy实现，修改[SPAC]下的Default值为C4或者更改代理默认端口为48102</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/c4%E9%85%8D%E7%BD%AE/" data-id="ckre6al41000bpkt4fzti0vvg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/21/Openshift%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Openshift常用命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/21/%E5%9C%A8Openshift%E6%90%AD%E5%BB%BAJava-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在Openshift搭建Java blog</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/21/asar-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8C%85/">asar 打包和解包</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/">Xterm/Uxterm配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Windows-%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">Windows 一些问题处理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/linux-selinux%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9D%97%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">linux selinux手动编译模块相关命令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/zabbix-trigger%E7%9A%84%E5%9D%91/">zabbix trigger的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 xiangyu chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

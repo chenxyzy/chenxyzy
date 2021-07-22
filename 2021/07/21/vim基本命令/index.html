@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>vim基本命令 | chenxyzy的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.vim#在命令行中输入vim,进入vim编辑器2.i#按一下i键,下端显示 –INSERT–#插入命令,在vim中可能任意字符都有作用3.Esc#退出i(插入)命令进行其它命令使用4.:r filename#读入一个文件内容,并写入到当前编辑器中5.:w newfilename#将该编辑器中的内容写入到一个新文件中6.:w#在编辑的过程中保存文件,相当于word中的ctrl+s7.:! com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim基本命令">
+<meta property="og:url" content="http://example.com/2021/07/21/vim%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="chenxyzy的博客">
+<meta property="og:description" content="1.vim#在命令行中输入vim,进入vim编辑器2.i#按一下i键,下端显示 –INSERT–#插入命令,在vim中可能任意字符都有作用3.Esc#退出i(插入)命令进行其它命令使用4.:r filename#读入一个文件内容,并写入到当前编辑器中5.:w newfilename#将该编辑器中的内容写入到一个新文件中6.:w#在编辑的过程中保存文件,相当于word中的ctrl+s7.:! com">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-21T07:56:26.000Z">
+<meta property="article:modified_time" content="2021-07-21T07:59:19.518Z">
+<meta property="article:author" content="xiangyu chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="chenxyzy的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">chenxyzy的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vim基本命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/vim%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2021-07-21T07:56:26.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vim基本命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.vim<br>#在命令行中输入vim,进入vim编辑器<br>2.i<br>#按一下i键,下端显示 –INSERT–<br>#插入命令,在vim中可能任意字符都有作用<br>3.Esc<br>#退出i(插入)命令进行其它命令使用<br>4.:r filename<br>#读入一个文件内容,并写入到当前编辑器中<br>5.:w newfilename<br>#将该编辑器中的内容写入到一个新文件中<br>6.:w<br>#在编辑的过程中保存文件,相当于word中的ctrl+s<br>7.:! command<br>暂时离开 vi 到指令列模式下执行 command 的显示结果！例如:!ls<br>#在编辑过程中执行shell命令ls<br>8.:sh<br>#进入shell命令行,执行完命令后ctrl+d退出重新进入vim编辑继续编辑<br>在shell命令下，执行ctral+l完成清屏<br>9.:wq<br>#保存文件并退出<br>10.ZZ<br>#保存文件并退出,同上一个命令,注意大写<br>11.:q!<br>#强制退出,不保存<br>12.:set number或者：set nu<br>#使编辑中的文件显示行号<br>13.:set nonumber或者：set nonu<br>#与上一条命令相反,不显示行号<br>14.:help i<br>#查看插入命令帮助<br>15.u<br>#撤消上一步操作<br>16./Fedora<br>#查找Fedora字符<br>17.:s /Fedora/Redhat<br>#将Fedora字符替换为Redhat(只替换在光标所在的行)<br>18.dw<br>#删除单词<br>dd<br>#删除行<br>19.o<br>#打开空白一行<br>20.vim + filename<br>#进行文件最后一行进行编辑<br>21.vim +n filename<br>#进入文件第n行进行编辑<br>22.:1,.s/redhat/fedora<br>#.号表示当前行,即光标所在行<br>#将第1行到当前行(.)第一次出现的redhat字符代替为fedora<br>23.:1,.s/redhat/fedora/g<br>#将第1行到当前行(.)所有出现的redhat字符代替为fedora,g<br>全局标志<br>24.:1,$s/redhat/fedora/g<br>#$表示最后一行<br>#将第1行到最后一行所有出现的redhat字符代替为fedora<br>25.:%s/redhat/fedora/g<br>#同上一个命令<br>26.:%s//fedora/g<br>#将第1行到最后一行所有出现的redhat字代替为fedora<br>#字,而不是字符<br>27.:f<br>#显示文件内容,状态等等<br>#同ctrl+g命令<br>28.:e!<br>#当前文件,返回到上次保存<br>:e file<br>#切换编辑文件<br>29.:n<br>#当编辑时有多个文件(比如vim file1 file2)时切换到下一个文件,与:e file结合使用</p>
+<pre><code>                         VIM命令大全
+</code></pre>
+<p>光标控制命令<br>命令                   光标移动<br>h                   向左移一个字符<br>j                   向下移一行<br>k                   向上移一行<br>l                   向右移一个字符<br>G                   移到文件的最后一行<br>w                   移到下一个字的开头<br>W                   移到下一个字的开头，忽略标点符号<br>b                   移到前一个字的开头<br>B                   移到前一个字的开头，忽略标点符号<br>L                   移到屏幕的最后一行<br>M                   移到屏幕的中间一行<br>H                   移到屏幕的第一行<br>e                   移到下一个字的结尾<br>E                   移到下一个字的结尾，忽略标点符号<br>(                       移到句子的开头<br>)                       移到句子的结尾<br>{                       移到段落的开头<br>}                       移到下一个段落的开头<br>0(数字), |                移到当前行的第一列<br>^                       移到当前行的第一个非空字符<br>$                       移到当前行的最后一个字符<br>+, Enter             移到下一行的第一个字符</p>
+<ul>
+<li><pre><code>                  移到前一行的第一个非空字符
+</code></pre>
+在 vi 中添加文本<br>命令                   插入动作<br>a                   在光标后插入文本<br>A                   在当前行插入文本<br>i                   在光标前插入文本<br>I                   在当前行前插入文本<br>o                   在当前行的下边插入新行<br>O                   在当前行的上边插入新行<br>s                   删除光标所在处字符，并进入插入模式<br>S                   删除光标所在的行，并进入插入模式<br>:r file             读入文件 file 内容，并插在当前行后<br>:nr file            读入文件 file 内容，并插在第 n 行后<br>Esc                 回到命令模式<br>^v char             插入时忽略 char 的指定意义，这是为了插入特殊字符<br>在 vi 中删除文本<br>命令                   删除操作<br>x                   删除光标处的字符<br>dw                  删至下一个字的开头<br>dG                  删除行，直到文件结束<br>dd                  删除整行<br>db                  删除光标前面的字<br>:n,md               从第 m 行开始往前删除 n 行<br>d, d$               从光标处删除到行尾<br>^h, backspace       插入时，删除前面的字符<br>^w                  插入时，删除前面的字<br>修改 vi 文本<br>每个命令前面的数字表示该命令重复的次数<br>命令                               替换操作<br>rchar                         用 char 替换当前字符<br>R text escape                 用 text 替换当前字符直到按下 Esc 键<br>stext escape                  用 text 代替当前字符<br>S 或 cctext escape             用 text 代替整行<br>cwtext escape                 将当前字改为 text<br>Ctext escape                  将当前行余下的改为 text<br>cG escape                     修改至文件的末尾<br>ccursor_cmd text escape       从当前位置处到光标命令位置处都改为 text<br>在 vi 中查找与替换<br>命令                               查找与替换操作<br>/text                         在文件中向前查找 text<br>?text                         在文件中向后查找 text<br>n                             在同一方向重复查找<br>N                             在相反方向重复查找<br>ftext                         在当前行向前查找 text<br>Ftext                         在当前行向后查找 text<br>ttext                         在当前行向前查找 text，并将光标定位在 text 的第一个字符<br>Ttext                         在当前行向后查找 text，并将光标定位在 text 的第一个字符<br>:set ic                       查找时忽略大小写<br>:set noic                     查找时对大小写敏感<br>:ranges/pat1/pat2/g           用 newtext 替换 oldtext<br>:m,ns/oldtext/newtext         在 m 行通过 n，用 newtext 替换 oldtext<br>&amp;                                  重复最后的 :s 命令<br>:g/text1/s/text2/text3        查找包含 text1 的行，用 text3 替换 text2<br>:g/text/command               在所有包含 text 的行运行 command 所表示的命令<br>:v/text/command               在所有不包含 text 的行运行 command 所表示的命令<br>在 vi 中复制文本<br>命令                      复制操作<br>yy                    将当前行的内容放入临时缓冲区<br>nyy                   将 n 行的内容放入临时缓冲区<br>p                     将临时缓冲区中的文本放入光标后<br>P                     将临时缓冲区中的文本放入光标前<br>“(a-z)nyy             复制 n 行放入名字为圆括号内的可命名缓冲区，省略 n 表示当前行<br>“(a-z)ndd             删除 n 行放入名字为圆括号内的可命名缓冲区，省略 n 表示当前行<br>“(a-z)p               将名字为圆括号的可命名缓冲区的内容放入当前行后<br>“(a-z)P               将名字为圆括号的可命名缓冲区的内容放入当前行前<br>在 vi 中撤消与重复<br>命令               撤消操作<br>u               撤消最后一次修改<br>U               撤消当前行的所有修改<br>.                  重复最后一次修改<br>,                  以相反的方向重复前面的 f、F、t 或 T 查找命令<br>;                  重复前面的 f、F、t 或 T 查找命令<br>“np             取回最后第 n 次的删除(缓冲区中存有一定次数的删除内容，一般为 9)<br>n               重复前面的 / 或 ? 查找命令<br>N               以相反方向重复前面的 / 或 ? 命令<br>保存文本和退出 vi<br>命令                      保存和/或退出操作<br>:w                    保存文件但不退出 vi<br>:w file               将修改保存在 file 中但不退出 vi<br>:wq 或 ZZ 或 :x         保存文件并退出 vi<br>:q!                   不保存文件，退出 vi<br>:e!                   放弃所有修改，从上次保存文件开始再编辑<br>vi 中的选项<br>选项                      作用<br>:set all              打印所有选项<br>:set nooption         关闭 option 选项<br>:set nu               每行前打印行号<br>:set showmode         显示是输入模式还是替换模式<br>:set autoindent          继承前一行的缩进方式，特别适用于多行注释<br>:set smartindent        为C程序提供自动缩进<br>:set list             显示制表符(^I)和行尾符号<br>:set ts=8             为文本输入设置 tab stops<br>:set window=n         设置文本窗口显示 n 行<br>:set number           显示行数<br>:set nonumber         取消显示行数<br>vi 的状态<br>选项                   作用<br>:.=                     打印当前行的行号<br>:=                     打印文件中的行数<br>ctrl+g             显示文件名、当前的行号、文件的总行数和文件位置的百分比<br>:l                 使用字母 “l” 来显示许多的特殊字符，如制表符和换行符<br>在文本中定位段落和放置标记<br>选项                      作用<br>{                         在第一列插入 { 来定义一个段落<br>[[                         回到段落的开头处<br>]]                         向前移到下一个段落的开头处<br>m(a-z)                用一个字母来标记当前位置，如用 mz 表示标记 z<br>‘(a-z)                将光标移动到指定的标记，如用 ‘z 表示移动到 z<br>在 vi 中连接行<br>选项                      作用<br>J                     将下一行连接到当前行的末尾<br>nJ                    连接后面 n 行<br>光标放置与屏幕调整<br>选项                      作用<br>H                     将光标移动到屏幕的顶行<br>nH                    将光标移动到屏幕顶行下的第 n 行<br>M                     将光标移动到屏幕的中间<br>L                     将光标移动到屏幕的底行<br>nL                    将光标移动到屏幕底行上的第 n 行<br>^e(ctrl+e)            将屏幕上滚一行<br>ctrl+y                将屏幕下滚一行<br>ctrl+u                将屏幕上滚半页<br>ctrl+d                将屏幕下滚半页<br>ctrl+b                将屏幕上滚一页<br>ctrl+f                将屏幕下滚一页<br>ctrl+l                重绘屏幕<br>z-return              将当前行置为屏幕的顶行<br>nz-return             将当前行下的第 n 行置为屏幕的顶行<br>z.                    将当前行置为屏幕的中央<br>nz.                   将当前行上的第 n 行置为屏幕的中央<br>z-                    将当前行置为屏幕的底行<br>nz-                   将当前行上的第 n 行置为屏幕的底行<br>vi 中的 shell 转义命令<br>选项                      作用<br>:!command             执行 shell 的 command 命令，如 :!ls<br>:!!                         执行前一个 shell 命令<br>:r!command            读取 command 命令的输入并插入，如 :r!ls 会先执行 ls，然后读入内容<br>:w!command            将当前已编辑文件作为 command 命令的标准输入并执行 command 命令，如 :w!grep all<br>:cd directory         将当前工作目录更改为 directory 所表示的目录<br>:sh                   将启动一个子 shell，使用 ^d(ctrl+d) 返回 vi<br>:so file              在 shell 程序 file 中读入和执行命令<br>vi 中的宏与缩写<br>(避免使用控制键和符号，不要使用字符 K、V、g、q、v、*、= 和功能键)<br>选项                      作用<br>:map key command_seq 定义一个键来运行 command_seq，如 :map e ea，无论什么时候都可以 e 移到一个字的末尾来追加文本<br>:map                  在状态行显示所有已定义的宏<br>:umap key             删除该键的宏<br>:ab string1 string2   定义一个缩写，使得当插入 string1 时，用 string2 替换 string1。当要插入文本时，键入 string1 然后按 Esc 键，系统就插入了 string2<br>:ab                   显示所有缩写<br>:una string           取消 string 的缩写<br>在 vi 中缩进文本<br>选项                     作用<br>ctrl+i或 tab     插入文本时，插入移动的宽度，移动宽度是事先定义好的<br>:set ai               打开自动缩进<br>:set sw=n             将移动宽度设置为 n 个字符<br>n&gt;                   使 n 行都向右移动一个宽度，例如 3&gt;&gt; 就将接下来的三行每行都向右移动一个移动宽度</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/vim%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" data-id="ckre6al4g000ppkt41r6a0rk2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/21/openwrt%E5%8A%A0%E8%BD%BD8187L%E5%A4%96%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%81%9A%E4%B8%AD%E7%BB%A7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          openwrt加载8187L外接网卡做中继
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/21/openshift-diy-Apache-php5-5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">openshift diy Apache php5.5</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/21/asar-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8C%85/">asar 打包和解包</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/">Xterm/Uxterm配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Windows-%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">Windows 一些问题处理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/linux-selinux%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9D%97%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">linux selinux手动编译模块相关命令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/zabbix-trigger%E7%9A%84%E5%9D%91/">zabbix trigger的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 xiangyu chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

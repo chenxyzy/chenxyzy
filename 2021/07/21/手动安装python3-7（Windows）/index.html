@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>手动安装python3.7（Windows） | chenxyzy的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我是用的python-3.7.2-amd64.exe进行解包然后一步一步进行手动安装的，环境是Windows7 X64； 1、解包python；    1.1、准备软件包（直接官网去）    1.2、解包，因为python3.7用的打包工具是Wix Toolset，所以还需要准备下；（我用的这个wix311-binaries.zip）    1.3、开始解包；        图片">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手动安装python3.7（Windows）">
+<meta property="og:url" content="http://example.com/2021/07/21/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85python3-7%EF%BC%88Windows%EF%BC%89/index.html">
+<meta property="og:site_name" content="chenxyzy的博客">
+<meta property="og:description" content="我是用的python-3.7.2-amd64.exe进行解包然后一步一步进行手动安装的，环境是Windows7 X64； 1、解包python；    1.1、准备软件包（直接官网去）    1.2、解包，因为python3.7用的打包工具是Wix Toolset，所以还需要准备下；（我用的这个wix311-binaries.zip）    1.3、开始解包；        图片">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-21T08:39:08.000Z">
+<meta property="article:modified_time" content="2021-07-21T08:39:37.601Z">
+<meta property="article:author" content="xiangyu chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="chenxyzy的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">chenxyzy的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-手动安装python3-7（Windows）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85python3-7%EF%BC%88Windows%EF%BC%89/" class="article-date">
+  <time datetime="2021-07-21T08:39:08.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      手动安装python3.7（Windows）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 我是用的python-3.7.2-amd64.exe进行解包然后一步一步进行手动安装的，环境是Windows7 X64；</p>
+<p>1、解包python；<br>    1.1、准备软件包（直接官网去）<br>    1.2、解包，因为python3.7用的打包工具是Wix Toolset，所以还需要准备下；（我用的这个wix311-binaries.zip）<br>    1.3、开始解包；<br>        图片<br>        解包后生成的东西；<br>        图片</p>
+<pre><code>    图片
+</code></pre>
+<p>2、解包python核心、库、执行、文档文件等；（我这边解压到了C:\Python\Python3）<br>        图片<br>        实际情况可以按照自己的需求来进行。我这边是全部解包了。会有如下内容；</p>
+<pre><code>    图片
+    图片
+    图片
+    注意：
+        msi结尾的文件都可以删了；
+        path,msi和pip.msi解包的时候可能会出现如下报错（可以不用解包这两个，后面会说明）：
+        图片
+    至此python所需的文件都已经准备好了；
+</code></pre>
+<p>3、环境变量配置（。。。）</p>
+<p>4、pip安装；<br>    当我进行到pip解包的时候竟然报错了，我又直接安装试试；<br>    图片<br>    提示如上信息，我估摸着应该是没有搜索到python程序；</p>
+<pre><code>4.1、分析pip是怎么安装的；
+    接着我网上搜索了下有没有解决办法，估计是关键字不对没有找到解决办法；
+    于是我用压缩软件打开看了下里面的有些什么；
+    图片
+    我看到这种后缀，我估摸着应该也可以用Wix Tollset进行解包吧。就试了下，还真可以；
+    
+    图片
+    会在pip.msi所在的目录下生成相应的包源文件；
+
+    图片
+
+     打开看看；
+      图片    
+    发现这里竟然有逻辑运算，哈哈；
+    图片
+    发现SetUpdatePipCommandLine关键字对应安装和升级，于是到相应的片段。
+    图片
+    这后面不就是python的参数么，果断试试；
+    图片
+
+    图片
+    折腾完毕，注意设置好pip的环境变量；
+</code></pre>
+<p>参考大佬：<a target="_blank" rel="noopener" href="https://my.oschina.net/livelite/blog/826054">https://my.oschina.net/livelite/blog/826054</a> ;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85python3-7%EF%BC%88Windows%EF%BC%89/" data-id="ckre6al4j000spkt4hlyjb8sn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/21/zabbix-trigger%E7%9A%84%E5%9D%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          zabbix trigger的坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/21/%E8%A7%A3%E5%86%B3virtualbox-portable%E5%88%9B%E5%BB%BAhost-only-network%E6%8A%A5%E9%94%99/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">解决virtualbox portable创建host only network报错</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/21/asar-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8C%85/">asar 打包和解包</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/">Xterm/Uxterm配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Windows-%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">Windows 一些问题处理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/linux-selinux%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9D%97%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">linux selinux手动编译模块相关命令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/zabbix-trigger%E7%9A%84%E5%9D%91/">zabbix trigger的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 xiangyu chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

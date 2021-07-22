@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>树莓派打造一台有线路由器（用无线连接） | chenxyzy的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="首先要感谢玩树莓派的大神。当然你得准备一台装好系统的树莓派，无线网卡，无线路由器。（本文用到的是 拓实n95 3070网卡） 1 用 lsusb命令看看网卡加载上没：2.1 安装必备程序1sudo apt-get install bridge-utils  3.1 安装必备程序12sudo apt-get install udhcpdudhcpd主要为连接树莓派的设备自动分配IP地址的，当然你也可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派打造一台有线路由器（用无线连接）">
+<meta property="og:url" content="http://example.com/2021/07/21/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E4%B8%80%E5%8F%B0%E6%9C%89%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%EF%BC%88%E7%94%A8%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5%EF%BC%89/index.html">
+<meta property="og:site_name" content="chenxyzy的博客">
+<meta property="og:description" content="首先要感谢玩树莓派的大神。当然你得准备一台装好系统的树莓派，无线网卡，无线路由器。（本文用到的是 拓实n95 3070网卡） 1 用 lsusb命令看看网卡加载上没：2.1 安装必备程序1sudo apt-get install bridge-utils  3.1 安装必备程序12sudo apt-get install udhcpdudhcpd主要为连接树莓派的设备自动分配IP地址的，当然你也可">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-21T08:16:11.000Z">
+<meta property="article:modified_time" content="2021-07-21T08:20:13.413Z">
+<meta property="article:author" content="xiangyu chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="chenxyzy的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">chenxyzy的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-树莓派打造一台有线路由器（用无线连接）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E4%B8%80%E5%8F%B0%E6%9C%89%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%EF%BC%88%E7%94%A8%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5%EF%BC%89/" class="article-date">
+  <time datetime="2021-07-21T08:16:11.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      树莓派打造一台有线路由器（用无线连接）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先要感谢玩树莓派的大神。当然你得准备一台装好系统的树莓派，无线网卡，无线路由器。（本文用到的是 拓实n95 3070网卡）</p>
+<h3 id="1-用-lsusb命令看看网卡加载上没："><a href="#1-用-lsusb命令看看网卡加载上没：" class="headerlink" title="1 用 lsusb命令看看网卡加载上没："></a>1 用 lsusb命令看看网卡加载上没：</h3><h3 id="2-1-安装必备程序"><a href="#2-1-安装必备程序" class="headerlink" title="2.1 安装必备程序"></a>2.1 安装必备程序</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install bridge-utils </span><br></pre></td></tr></table></figure>
+<h3 id="3-1-安装必备程序"><a href="#3-1-安装必备程序" class="headerlink" title="3.1 安装必备程序"></a>3.1 安装必备程序</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install udhcpd</span><br><span class="line">udhcpd主要为连接树莓派的设备自动分配IP地址的，当然你也可以换用你所熟悉的软件。</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-配置udhcpd，编辑-etc-udhcpd-conf，主要内容如下："><a href="#3-2-配置udhcpd，编辑-etc-udhcpd-conf，主要内容如下：" class="headerlink" title="3.2 配置udhcpd，编辑/etc/udhcpd.conf，主要内容如下："></a>3.2 配置udhcpd，编辑/etc/udhcpd.conf，主要内容如下：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">start 192.168.10.2 # This is the range of IPs that the hostspot will give to client devices.</span><br><span class="line">end 192.168.10.255</span><br><span class="line">interface eth0 # The device uDHCP listens on.</span><br><span class="line">remaining yes</span><br><span class="line">opt dns 8.8.8.8 4.2.2.2 # The DNS servers client devices will use.</span><br><span class="line">opt subnet 255.255.255.0</span><br><span class="line">opt router 192.168.10.1 # The Pi&#x27;s IP address on wlan0 which we will set up shortly.</span><br><span class="line">opt lease 864000 # 10 day DHCP lease time in seconds</span><br><span class="line"></span><br><span class="line">接下来编辑/etc/default/udhcpd并且将下面这行注释掉，以使DHCP Server正常工作：</span><br><span class="line"></span><br><span class="line">#DHCPD_ENABLED=&quot;no&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-配置有线网卡"><a href="#3-3-配置有线网卡" class="headerlink" title="3.3 配置有线网卡"></a>3.3 配置有线网卡</h3><p>通过下面的命令给有线网卡设置一个IP地址：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">sudo ifconfig eth0 192.168.10.1</span><br><span class="line">当然为了下次启动仍然有效，我们需要配置/etc/network/interfaces文件：</span><br><span class="line"></span><br><span class="line">sudo nano /etc/network/interfaces</span><br><span class="line">auto lo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iface lo inet loopback</span><br><span class="line"></span><br><span class="line"><span class="comment">#iface eth0 inet dhcp</span></span><br><span class="line"></span><br><span class="line">iface eth0 inet static</span><br><span class="line"></span><br><span class="line">  address 192.168.10.1</span><br><span class="line"></span><br><span class="line">  netmask 255.255.255.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">allow-hotplug wlan0</span><br><span class="line"></span><br><span class="line">iface wlan0 inet manual</span><br><span class="line"></span><br><span class="line">wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf</span><br><span class="line"></span><br><span class="line">iface default inet dhcp</span><br></pre></td></tr></table></figure>
+<p>到这里，输入 sudo service udhcpd start 设备应该可以分配到ip啦</p>
+<p>接下来就是配置无线网卡使之能连接到Internet</p>
+<p>测试无线信号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo iwlist wlan0 scan</span><br></pre></td></tr></table></figure>
+<p>系统回显找到的所有无线网络的MAC地址，SSID等相关信息。</p>
+<p>配置无线网络：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install wpasupplicant</span><br></pre></td></tr></table></figure>
+<p>安装完成之后，创建一个配置文件，输入如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nano /etc/wpa.conf</span><br></pre></td></tr></table></figure>
+<p>将下列内容复制进去：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">network=&#123;</span><br><span class="line">ssid=&quot;你用的WIFI的SSID&quot;</span><br><span class="line">proto=RSN</span><br><span class="line">key_mgmt=WPA-PSK</span><br><span class="line">pairwise=CCMP TKIP</span><br><span class="line">group=CCMP TKIP</span><br><span class="line">psk=&quot;WIFI的密码&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来编辑网络配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/network/interfaces</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">auto lo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iface lo inet loopback</span><br><span class="line"></span><br><span class="line">#iface eth0 inet dhcp</span><br><span class="line"></span><br><span class="line">iface eth0 inet static</span><br><span class="line"></span><br><span class="line">  address 192.168.10.1</span><br><span class="line"></span><br><span class="line">  netmask 255.255.255.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">allow-hotplug wlan0</span><br><span class="line"></span><br><span class="line">iface wlan0 inet manual</span><br><span class="line"></span><br><span class="line">wpa-roam /etc/wpa.conf     &lt;---增加此行</span><br><span class="line"></span><br><span class="line">#wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf       &lt;---注释掉此行 </span><br><span class="line"></span><br><span class="line">iface default inet dhcp</span><br></pre></td></tr></table></figure>
+
+
+<p>保存，退出。</p>
+<p>重启树莓派，记得拔掉网线，它将自动连上无线网络。</p>
+<p>之后，若要换无线网，只需要编辑/etc/wpa.conf中的ssid和psk即可。</p>
+<h3 id="4-1-启动IP转向功能以便于开通NAT"><a href="#4-1-启动IP转向功能以便于开通NAT" class="headerlink" title="4.1 启动IP转向功能以便于开通NAT"></a>4.1 启动IP转向功能以便于开通NAT</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c <span class="string">&quot;echo 1 &gt; /proc/sys/net/ipv4/ip_forward&quot;</span></span><br></pre></td></tr></table></figure>
+<p>编辑/etc/sysctl.conf改动下面这行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.ip_forward=1</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-配置iptables防火墙"><a href="#4-2-配置iptables防火墙" class="headerlink" title="4.2 配置iptables防火墙"></a>4.2 配置iptables防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE</span><br><span class="line">sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p>到这里路由的NAT功能已经被启用，我们将刚才配置的iptables保存下来以便于下次使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c <span class="string">&quot;iptables-save &gt; /etc/iptables.ipv4.nat&quot;</span></span><br><span class="line">编辑/etc/network/interfaces然后在最后加上下面这行以使每次启动都自动加载iptables配置：</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">up iptables-restore &lt; /etc/iptables.ipv4.nat</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-启动相应软件，并加入启动项"><a href="#4-3-启动相应软件，并加入启动项" class="headerlink" title="4.3 启动相应软件，并加入启动项"></a>4.3 启动相应软件，并加入启动项</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service udhcpd start</span><br><span class="line">sudo update-rc.d udhcpd <span class="built_in">enable</span></span><br></pre></td></tr></table></figure>
+
+<p>至此连接树莓派的设备应该能上网啦。</p>
+<p>注意：用usb hub 带网卡，连接树莓派，不能无线和有线同时使用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/%E6%A0%91%E8%8E%93%E6%B4%BE%E6%89%93%E9%80%A0%E4%B8%80%E5%8F%B0%E6%9C%89%E7%BA%BF%E8%B7%AF%E7%94%B1%E5%99%A8%EF%BC%88%E7%94%A8%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5%EF%BC%89/" data-id="ckre6al4n000wpkt4dhkb2z1t" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/21/%E7%BB%99NanoPC-T1%E6%9E%84%E5%BB%BAubuntu-armv7%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          给NanoPC-T1构建ubuntu armv7文件系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/21/%E6%A0%91%E8%8E%93%E6%B4%BE-%E6%97%A0%E7%BA%BF%E5%92%8C%E6%9C%89%E7%BA%BF%E6%A1%A5%E6%8E%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">树莓派 无线和有线桥接</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/21/asar-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8C%85/">asar 打包和解包</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/">Xterm/Uxterm配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Windows-%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">Windows 一些问题处理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/linux-selinux%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9D%97%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">linux selinux手动编译模块相关命令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/zabbix-trigger%E7%9A%84%E5%9D%91/">zabbix trigger的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 xiangyu chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

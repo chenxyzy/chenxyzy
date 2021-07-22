@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>chenxyzy的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="chenxyzy的博客">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="chenxyzy的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="xiangyu chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="chenxyzy的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">chenxyzy的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-树莓派设置静态IP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81IP/" class="article-date">
+  <time datetime="2021-07-21T08:09:49.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81IP/">树莓派设置静态IP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1、启动树莓派"><a href="#1、启动树莓派" class="headerlink" title="1、启动树莓派"></a>1、启动树莓派</h3><h3 id="2、设置树莓派IP地址"><a href="#2、设置树莓派IP地址" class="headerlink" title="2、设置树莓派IP地址"></a>2、设置树莓派IP地址</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo ifconfig eth0 192.168.1.222 netmask 255.255.255.0</span><br><span class="line"></span><br><span class="line">sudo route add default gw 192.168.1.1</span><br><span class="line">sudo ifconfig eth0 up</span><br></pre></td></tr></table></figure>
+<h3 id="3、更新apt-get-及-安装VIM"><a href="#3、更新apt-get-及-安装VIM" class="headerlink" title="3、更新apt-get 及 安装VIM"></a>3、更新apt-get 及 安装VIM</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install vim</span><br></pre></td></tr></table></figure>
+<h3 id="4、修改-etc-network-interfaces"><a href="#4、修改-etc-network-interfaces" class="headerlink" title="4、修改 /etc/network/interfaces"></a>4、修改 /etc/network/interfaces</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/network/interfaces</span><br></pre></td></tr></table></figure>
+<p>修改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">auto lo  </span><br><span class="line">  </span><br><span class="line">iface lo inet loopback  </span><br><span class="line">iface eth0 inet static  </span><br><span class="line">  </span><br><span class="line">address 192.168.1.222  </span><br><span class="line">netmask 255.255.255.0  </span><br><span class="line">gateway 192.168.1.1  </span><br><span class="line">  </span><br><span class="line">allow-hotplug wlan0  </span><br><span class="line">iface wlan0 inet manual  </span><br><span class="line">wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf  </span><br></pre></td></tr></table></figure>
+
+<h3 id="5、重启服务"><a href="#5、重启服务" class="headerlink" title="5、重启服务"></a>5、重启服务</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service networking restart</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/%E6%A0%91%E8%8E%93%E6%B4%BE%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81IP/" data-id="ckre6al4o000xpkt45tt3faoo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-树莓派实战之配置无线网络" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%9E%E6%88%98%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C/" class="article-date">
+  <time datetime="2021-07-21T08:08:04.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%9E%E6%88%98%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C/">树莓派实战之配置无线网络</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>插入网卡，启动树莓派。输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo lsusb</span><br></pre></td></tr></table></figure>
+<p>显示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Bus 001 Device 002: ID 0424:9512 Standard Microsystems Corp.</span><br><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br><span class="line">Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp.</span><br><span class="line">Bus 001 Device 004: ID 0bda:8176 Realtek Semiconductor Corp. RTL8188CUS 802.11n WLAN Adapter</span><br></pre></td></tr></table></figure>
+<p>最后的 RTL8188CUS 802.11n WLAN Adapter 即是我的无线网卡，已经正确被识别。</p>
+<p>测试无线信号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo iwlist wlan0 scan</span><br></pre></td></tr></table></figure>
+<p>系统回显找到的所有无线网络的MAC地址，SSID等相关信息。</p>
+<p>配置无线网络：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install wpasupplicant</span><br></pre></td></tr></table></figure>
+<p>安装完成之后，创建一个配置文件，输入如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nano /etc/wpa.conf</span><br></pre></td></tr></table></figure>
+<p>将下列内容复制进去：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">network=&#123;</span><br><span class="line">ssid=&quot;你用的WIFI的SSID&quot;</span><br><span class="line">proto=RSN</span><br><span class="line">key_mgmt=WPA-PSK</span><br><span class="line">pairwise=CCMP TKIP</span><br><span class="line">group=CCMP TKIP</span><br><span class="line">psk=&quot;WIFI的密码&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来编辑网络配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/network/interfaces</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">auto lo</span><br><span class="line"></span><br><span class="line">iface lo inet loopback</span><br><span class="line">iface eth0 inet dhcp</span><br><span class="line"></span><br><span class="line">allow-hotplug wlan0</span><br><span class="line">iface wlan0 inet manual</span><br><span class="line">wpa-roam /etc/wpa.conf  &lt;---增加此行</span><br><span class="line">#wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf   &lt;---注释掉此行</span><br><span class="line">iface default inet dhcp</span><br></pre></td></tr></table></figure>
+<p>保存，退出。</p>
+<p>重启树莓派，记得拔掉网线，它将自动连上无线网络。</p>
+<p>之后，若要换无线网，只需要编辑/etc/wpa.conf中的ssid和psk即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%9E%E6%88%98%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C/" data-id="ckre6al4l000upkt44oqs8fwq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-安装dhcp服务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/%E5%AE%89%E8%A3%85dhcp%E6%9C%8D%E5%8A%A1/" class="article-date">
+  <time datetime="2021-07-21T08:06:00.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/%E5%AE%89%E8%A3%85dhcp%E6%9C%8D%E5%8A%A1/">安装dhcp服务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>输入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install isc-dhcp-server</span><br></pre></td></tr></table></figure>
+<p>备份配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv /etc/dhcp/dhcpd.conf  /etc/dhcp/dhcpd.conf.bak</span><br></pre></td></tr></table></figure>
+<p>编辑新的配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/dhcp/dhcpd.conf</span><br></pre></td></tr></table></figure>
+<p>复制粘贴以下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">default-lease-time 600;</span><br><span class="line">max-lease-time 7200;</span><br><span class="line">log-facility local7;</span><br><span class="line"> </span><br><span class="line">subnet 192.168.10.0 netmask 255.255.255.0 &#123;</span><br><span class="line">  range 192.168.10.10 192.168.10.100;</span><br><span class="line">  option routers 192.168.10.1;</span><br><span class="line">  option broadcast-address 192.168.10.127;</span><br><span class="line">  option domain-name-servers 8.8.8.8,8.8.4.4;</span><br><span class="line">  default-lease-time 600;</span><br><span class="line">  max-lease-time 7200;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>保存退出，重新启动服务。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service  isc-dhcp-server restart</span><br></pre></td></tr></table></figure>
+<p>这个时候可以在无线网络列表里面连接RaspberryPi，连接成功以后会分配一个IP。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/%E5%AE%89%E8%A3%85dhcp%E6%9C%8D%E5%8A%A1/" data-id="ckre6al4f000opkt46txqgf0t" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iptables设置做nat转发" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/iptables%E8%AE%BE%E7%BD%AE%E5%81%9Anat%E8%BD%AC%E5%8F%91/" class="article-date">
+  <time datetime="2021-07-21T08:04:42.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/iptables%E8%AE%BE%E7%BD%AE%E5%81%9Anat%E8%BD%AC%E5%8F%91/">iptables设置做nat转发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先开启内核转发的模块。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /porc/sys/net/ipv4/ip_forward  <span class="comment">#这是个暂时的做法，重启后就会失效，好的做法是：</span></span><br></pre></td></tr></table></figure>
+<p>vi /etc/sysctl.conf<br>修改其中的net.ipv4.ip_forward = 1</p>
+<p>DNS的配置在/etc/resolv.conf中添加DNS的IP即可<br>然后要让它立即生效，需要执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p </span><br></pre></td></tr></table></figure>
+<p>至此第一步搞定。</p>
+<p>第二步添加NAT：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE</span><br><span class="line"><span class="comment">#这条命令里的 eth0代表外网接口，-s 192.168.10.0/24代表内网段</span></span><br></pre></td></tr></table></figure>
+<p>2008.10.13配置时问题：</p>
+<p>注意在配置时清空系统默认的iptables规则；<br>做iptables的机器的DNS要设置对，使它能正常上网。<br>iptables的参数及设置特多，还需要好好学习。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/iptables%E8%AE%BE%E7%BD%AE%E5%81%9Anat%E8%BD%AC%E5%8F%91/" data-id="ckre6al47000gpkt416kh7lbw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-openwrt加载8187L外接网卡做中继" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/openwrt%E5%8A%A0%E8%BD%BD8187L%E5%A4%96%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%81%9A%E4%B8%AD%E7%BB%A7/" class="article-date">
+  <time datetime="2021-07-21T08:00:21.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/openwrt%E5%8A%A0%E8%BD%BD8187L%E5%A4%96%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%81%9A%E4%B8%AD%E7%BB%A7/">openwrt加载8187L外接网卡做中继</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上网环境：RG100A刷openwrt backfire 10.03.1-rc4加载8187L外接网卡做中继，很稳定，在线看视频也没有掉线，两台电脑连接。</p>
+<p>以前一直用openwrt官网集成的10.03中文固件，加载8187L外接网卡做中继，可是不稳定，用了不久就掉线，不知跟中文版有没有原因，据说有些问题是中文版特有的，我也不太清楚，现在换了固件，刷官方英文原版backfire 10.03.1-rc4固件，再加载8187L网卡试试，挺稳定的，8187L的大功率做接收，路由自带网卡做ap，可以说是完美的中继，下面说说步骤。<br>官网固件，我刷第一个</p>
+<p>首先是刷固件，我直接在原来的openwrt上web升级的，原版openwrt固件只集成基本的应用，要想加载8187L做中继需要安装部分应用<br>安装USB应用和8187L网卡驱动<br>    安装方法一：在线安装<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用PuTTY登录路由，输入下面命令</span><br><span class="line">opkg update</span><br><span class="line">opkg install kmod-eeprom-93cx6_2.6.32.25-1_brcm63xx.ipk </span><br><span class="line">opkg install kmod-nls-base_2.6.32.25-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-rtl8187_2.6.32.25+2010-10-19-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-usb-core_2.6.32.25-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-usb-ohci_2.6.32.25-1_brcm63xx.ipk</span><br></pre></td></tr></table></figure><br>    安装方法二：离线安装<br>    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">先下载以上的5个ipk包，用WinScp上传到路由的tmp文件夹</span><br><span class="line">然后用PuTTY登录路由，输入下面命令</span><br><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line">opkg install kmod-eeprom-93cx6_2.6.32.25-1_brcm63xx.ipk </span><br><span class="line">opkg install kmod-nls-base_2.6.32.25-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-usb-core_2.6.32.25-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-usb-core_2.6.32.25-1_brcm63xx.ipk</span><br><span class="line">opkg install kmod-usb-ohci_2.6.32.25-1_brcm63xx.ipk</span><br></pre></td></tr></table></figure><br>组件安装完毕，下面开始配置：<br>配置network，用WinScp登录路由修改<br>etc/config的network，只需修改lan和wan1，其他的不用管，修改如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">config &#x27;switch&#x27; &#x27;eth1&#x27;</span><br><span class="line">option &#x27;reset&#x27; &#x27;1&#x27;</span><br><span class="line">option &#x27;enable_vlan&#x27; &#x27;1&#x27;</span><br><span class="line">config &#x27;switch_vlan&#x27;</span><br><span class="line">option &#x27;device&#x27; &#x27;eth1&#x27;</span><br><span class="line">option &#x27;vlan&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;ports&#x27; &#x27;0 1 2 5*&#x27;</span><br><span class="line">config &#x27;switch_vlan&#x27;</span><br><span class="line">option &#x27;device&#x27; &#x27;eth1&#x27;</span><br><span class="line">option &#x27;vlan&#x27; &#x27;1&#x27;</span><br><span class="line">option &#x27;ports&#x27; &#x27;3 5*&#x27;</span><br><span class="line">config &#x27;interface&#x27; &#x27;loopback&#x27;</span><br><span class="line">option &#x27;ifname&#x27; &#x27;lo&#x27;</span><br><span class="line">option &#x27;proto&#x27; &#x27;static&#x27;</span><br><span class="line">option &#x27;ipaddr&#x27; &#x27;127.0.0.1&#x27;</span><br><span class="line">option &#x27;netmask&#x27; &#x27;255.0.0.0&#x27;</span><br><span class="line">config &#x27;interface&#x27; &#x27;lan&#x27;</span><br><span class="line">option &#x27;type&#x27; &#x27;bridge&#x27;</span><br><span class="line">option &#x27;ifname&#x27; &#x27;eth1.0&#x27;</span><br><span class="line">option &#x27;proto&#x27; &#x27;static&#x27;</span><br><span class="line">option &#x27;netmask&#x27; &#x27;255.255.255.0&#x27;</span><br><span class="line">option &#x27;nat&#x27; &#x27;1&#x27;</span><br><span class="line">option &#x27;ipaddr&#x27; &#x27;192.168.3.1&#x27;（lan网段要跟上级路由错开，此处为登录自己路由时的ip）</span><br><span class="line">config &#x27;interface&#x27; &#x27;wan&#x27;</span><br><span class="line">option &#x27;defaultroute&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;peerdns&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;proto&#x27; &#x27;dhcp&#x27;</span><br><span class="line">option &#x27;dns&#x27; &#x27;192.168.1.1&#x27;</span><br><span class="line">option &#x27;ifname&#x27; &#x27;eth1.1&#x27;</span><br><span class="line">config &#x27;interface&#x27; &#x27;wan1&#x27;</span><br><span class="line">option &#x27;ifname&#x27; &#x27;wlan1&#x27;</span><br><span class="line">option &#x27;defaultroute&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;peerdns&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;dns&#x27; &#x27;192.168.0.1&#x27;（上级路由DNS）</span><br><span class="line">option &#x27;proto&#x27; &#x27;static&#x27;          （静态ip）</span><br><span class="line">option &#x27;ipaddr&#x27; &#x27;192.168.0.110&#x27;（ipv4地址）</span><br><span class="line">option &#x27;netmask&#x27; &#x27;255.255.255.0&#x27;（子掩码）</span><br><span class="line">option &#x27;gateway&#x27; &#x27;192.168.0.1&#x27;（上级路由网关）</span><br><span class="line">配置完毕，保存退出。</span><br><span class="line">配置etc/config的wireless，修改如下：</span><br><span class="line">config &#x27;wifi-device&#x27; &#x27;radio0&#x27;（路由自带网卡）</span><br><span class="line">option &#x27;type&#x27; &#x27;mac80211&#x27;</span><br><span class="line">option &#x27;macaddr&#x27; &#x27;00:74:04:07:53:bb&#x27;</span><br><span class="line">option &#x27;hwmode&#x27; &#x27;11g&#x27;</span><br><span class="line">option &#x27;disabled&#x27; &#x27;0&#x27;</span><br><span class="line">option &#x27;txpower&#x27; &#x27;20&#x27;</span><br><span class="line">option &#x27;channel&#x27; &#x27;11&#x27;</span><br><span class="line">config &#x27;wifi-iface&#x27;</span><br><span class="line">option &#x27;device&#x27; &#x27;radio0&#x27;</span><br><span class="line">option &#x27;encryption&#x27; &#x27;psk&#x27;（加密方式）</span><br><span class="line">option &#x27;key&#x27; &#x27;aa131698&#x27;（密码）</span><br><span class="line">option &#x27;ssid&#x27; &#x27;OpenWrt&#x27;（广播的SSID）</span><br><span class="line">option &#x27;network&#x27; &#x27;lan&#x27;</span><br><span class="line">option &#x27;mode&#x27; &#x27;ap&#x27;          （接入点模式）</span><br><span class="line">config &#x27;wifi-device&#x27; &#x27;radio1&#x27;（外接8187L网卡）</span><br><span class="line">option &#x27;type&#x27; &#x27;mac80211&#x27;</span><br><span class="line">option &#x27;macaddr&#x27; &#x27;00:e0:4c:92:cd:d6&#x27;（外接网卡MAC）</span><br><span class="line">option &#x27;hwmode&#x27; &#x27;11g&#x27;</span><br><span class="line">option &#x27;txpower&#x27; &#x27;20&#x27;</span><br><span class="line">option &#x27;channel&#x27; &#x27;1&#x27;（上级路由信道，必须要一致）</span><br><span class="line">option &#x27;disabled&#x27; &#x27;0&#x27;</span><br><span class="line">config &#x27;wifi-iface&#x27;</span><br><span class="line">option &#x27;device&#x27; &#x27;radio1&#x27;</span><br><span class="line">option &#x27;network&#x27; &#x27;wan1&#x27;</span><br><span class="line">option &#x27;mode&#x27; &#x27;sta&#x27;（客户端模式）</span><br><span class="line">option &#x27;encryption&#x27; &#x27;none&#x27;（上级路由加密方式）</span><br><span class="line">option &#x27;ssid&#x27; &#x27;Tenda_5056C8&#x27;（上级路由广播SSID）</span><br></pre></td></tr></table></figure>
+<p>保存，退出，重启路由就可以上网了。<br>重启完毕后会出现wan，wan1和radio0，radio1<br>wan对应的是lan4，wan1对应的是外接网卡接入，radio0对应的是路由自身的无线网卡，radio1对应的是外接网卡</p>
+<p>扫描到的信号</p>
+<p>可以上网了</p>
+<p>中继需要用到的软件包</p>
+<p>固件我就不上传了,给个链接,大家有兴趣的话可以去下载<a target="_blank" rel="noopener" href="http://downloads.openwrt.org/backfire/10.03.1-rc5/brcm63xx/">http://downloads.openwrt.org/backfire/10.03.1-rc5/brcm63xx/</a></p>
+<p>rc5界面变得更加好看和人性化了，安装luci-i18n-chinese可以实现中文化了，中继比rc4更好用，就是rc5的中继设置跟rc4有少少区别，呵呵，看有没有人感兴趣，多的话我再写rc5加载8187L做中继的教程，上面的连接我改为rc5的了，想下载rc4的话只要把连接上的rc5改为rc4就可以了，本教程适用于rc4，对于rc5，并不适用，上面给出的软件包适用于rc4固件，在rc5上我没有测试</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/openwrt%E5%8A%A0%E8%BD%BD8187L%E5%A4%96%E6%8E%A5%E7%BD%91%E5%8D%A1%E5%81%9A%E4%B8%AD%E7%BB%A7/" data-id="ckre6al4b000kpkt46yoh3nhz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vim基本命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/vim%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2021-07-21T07:56:26.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/vim%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">vim基本命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.vim<br>#在命令行中输入vim,进入vim编辑器<br>2.i<br>#按一下i键,下端显示 –INSERT–<br>#插入命令,在vim中可能任意字符都有作用<br>3.Esc<br>#退出i(插入)命令进行其它命令使用<br>4.:r filename<br>#读入一个文件内容,并写入到当前编辑器中<br>5.:w newfilename<br>#将该编辑器中的内容写入到一个新文件中<br>6.:w<br>#在编辑的过程中保存文件,相当于word中的ctrl+s<br>7.:! command<br>暂时离开 vi 到指令列模式下执行 command 的显示结果！例如:!ls<br>#在编辑过程中执行shell命令ls<br>8.:sh<br>#进入shell命令行,执行完命令后ctrl+d退出重新进入vim编辑继续编辑<br>在shell命令下，执行ctral+l完成清屏<br>9.:wq<br>#保存文件并退出<br>10.ZZ<br>#保存文件并退出,同上一个命令,注意大写<br>11.:q!<br>#强制退出,不保存<br>12.:set number或者：set nu<br>#使编辑中的文件显示行号<br>13.:set nonumber或者：set nonu<br>#与上一条命令相反,不显示行号<br>14.:help i<br>#查看插入命令帮助<br>15.u<br>#撤消上一步操作<br>16./Fedora<br>#查找Fedora字符<br>17.:s /Fedora/Redhat<br>#将Fedora字符替换为Redhat(只替换在光标所在的行)<br>18.dw<br>#删除单词<br>dd<br>#删除行<br>19.o<br>#打开空白一行<br>20.vim + filename<br>#进行文件最后一行进行编辑<br>21.vim +n filename<br>#进入文件第n行进行编辑<br>22.:1,.s/redhat/fedora<br>#.号表示当前行,即光标所在行<br>#将第1行到当前行(.)第一次出现的redhat字符代替为fedora<br>23.:1,.s/redhat/fedora/g<br>#将第1行到当前行(.)所有出现的redhat字符代替为fedora,g<br>全局标志<br>24.:1,$s/redhat/fedora/g<br>#$表示最后一行<br>#将第1行到最后一行所有出现的redhat字符代替为fedora<br>25.:%s/redhat/fedora/g<br>#同上一个命令<br>26.:%s//fedora/g<br>#将第1行到最后一行所有出现的redhat字代替为fedora<br>#字,而不是字符<br>27.:f<br>#显示文件内容,状态等等<br>#同ctrl+g命令<br>28.:e!<br>#当前文件,返回到上次保存<br>:e file<br>#切换编辑文件<br>29.:n<br>#当编辑时有多个文件(比如vim file1 file2)时切换到下一个文件,与:e file结合使用</p>
+<pre><code>                         VIM命令大全
+</code></pre>
+<p>光标控制命令<br>命令                   光标移动<br>h                   向左移一个字符<br>j                   向下移一行<br>k                   向上移一行<br>l                   向右移一个字符<br>G                   移到文件的最后一行<br>w                   移到下一个字的开头<br>W                   移到下一个字的开头，忽略标点符号<br>b                   移到前一个字的开头<br>B                   移到前一个字的开头，忽略标点符号<br>L                   移到屏幕的最后一行<br>M                   移到屏幕的中间一行<br>H                   移到屏幕的第一行<br>e                   移到下一个字的结尾<br>E                   移到下一个字的结尾，忽略标点符号<br>(                       移到句子的开头<br>)                       移到句子的结尾<br>{                       移到段落的开头<br>}                       移到下一个段落的开头<br>0(数字), |                移到当前行的第一列<br>^                       移到当前行的第一个非空字符<br>$                       移到当前行的最后一个字符<br>+, Enter             移到下一行的第一个字符</p>
+<ul>
+<li><pre><code>                  移到前一行的第一个非空字符
+</code></pre>
+在 vi 中添加文本<br>命令                   插入动作<br>a                   在光标后插入文本<br>A                   在当前行插入文本<br>i                   在光标前插入文本<br>I                   在当前行前插入文本<br>o                   在当前行的下边插入新行<br>O                   在当前行的上边插入新行<br>s                   删除光标所在处字符，并进入插入模式<br>S                   删除光标所在的行，并进入插入模式<br>:r file             读入文件 file 内容，并插在当前行后<br>:nr file            读入文件 file 内容，并插在第 n 行后<br>Esc                 回到命令模式<br>^v char             插入时忽略 char 的指定意义，这是为了插入特殊字符<br>在 vi 中删除文本<br>命令                   删除操作<br>x                   删除光标处的字符<br>dw                  删至下一个字的开头<br>dG                  删除行，直到文件结束<br>dd                  删除整行<br>db                  删除光标前面的字<br>:n,md               从第 m 行开始往前删除 n 行<br>d, d$               从光标处删除到行尾<br>^h, backspace       插入时，删除前面的字符<br>^w                  插入时，删除前面的字<br>修改 vi 文本<br>每个命令前面的数字表示该命令重复的次数<br>命令                               替换操作<br>rchar                         用 char 替换当前字符<br>R text escape                 用 text 替换当前字符直到按下 Esc 键<br>stext escape                  用 text 代替当前字符<br>S 或 cctext escape             用 text 代替整行<br>cwtext escape                 将当前字改为 text<br>Ctext escape                  将当前行余下的改为 text<br>cG escape                     修改至文件的末尾<br>ccursor_cmd text escape       从当前位置处到光标命令位置处都改为 text<br>在 vi 中查找与替换<br>命令                               查找与替换操作<br>/text                         在文件中向前查找 text<br>?text                         在文件中向后查找 text<br>n                             在同一方向重复查找<br>N                             在相反方向重复查找<br>ftext                         在当前行向前查找 text<br>Ftext                         在当前行向后查找 text<br>ttext                         在当前行向前查找 text，并将光标定位在 text 的第一个字符<br>Ttext                         在当前行向后查找 text，并将光标定位在 text 的第一个字符<br>:set ic                       查找时忽略大小写<br>:set noic                     查找时对大小写敏感<br>:ranges/pat1/pat2/g           用 newtext 替换 oldtext<br>:m,ns/oldtext/newtext         在 m 行通过 n，用 newtext 替换 oldtext<br>&amp;                                  重复最后的 :s 命令<br>:g/text1/s/text2/text3        查找包含 text1 的行，用 text3 替换 text2<br>:g/text/command               在所有包含 text 的行运行 command 所表示的命令<br>:v/text/command               在所有不包含 text 的行运行 command 所表示的命令<br>在 vi 中复制文本<br>命令                      复制操作<br>yy                    将当前行的内容放入临时缓冲区<br>nyy                   将 n 行的内容放入临时缓冲区<br>p                     将临时缓冲区中的文本放入光标后<br>P                     将临时缓冲区中的文本放入光标前<br>“(a-z)nyy             复制 n 行放入名字为圆括号内的可命名缓冲区，省略 n 表示当前行<br>“(a-z)ndd             删除 n 行放入名字为圆括号内的可命名缓冲区，省略 n 表示当前行<br>“(a-z)p               将名字为圆括号的可命名缓冲区的内容放入当前行后<br>“(a-z)P               将名字为圆括号的可命名缓冲区的内容放入当前行前<br>在 vi 中撤消与重复<br>命令               撤消操作<br>u               撤消最后一次修改<br>U               撤消当前行的所有修改<br>.                  重复最后一次修改<br>,                  以相反的方向重复前面的 f、F、t 或 T 查找命令<br>;                  重复前面的 f、F、t 或 T 查找命令<br>“np             取回最后第 n 次的删除(缓冲区中存有一定次数的删除内容，一般为 9)<br>n               重复前面的 / 或 ? 查找命令<br>N               以相反方向重复前面的 / 或 ? 命令<br>保存文本和退出 vi<br>命令                      保存和/或退出操作<br>:w                    保存文件但不退出 vi<br>:w file               将修改保存在 file 中但不退出 vi<br>:wq 或 ZZ 或 :x         保存文件并退出 vi<br>:q!                   不保存文件，退出 vi<br>:e!                   放弃所有修改，从上次保存文件开始再编辑<br>vi 中的选项<br>选项                      作用<br>:set all              打印所有选项<br>:set nooption         关闭 option 选项<br>:set nu               每行前打印行号<br>:set showmode         显示是输入模式还是替换模式<br>:set autoindent          继承前一行的缩进方式，特别适用于多行注释<br>:set smartindent        为C程序提供自动缩进<br>:set list             显示制表符(^I)和行尾符号<br>:set ts=8             为文本输入设置 tab stops<br>:set window=n         设置文本窗口显示 n 行<br>:set number           显示行数<br>:set nonumber         取消显示行数<br>vi 的状态<br>选项                   作用<br>:.=                     打印当前行的行号<br>:=                     打印文件中的行数<br>ctrl+g             显示文件名、当前的行号、文件的总行数和文件位置的百分比<br>:l                 使用字母 “l” 来显示许多的特殊字符，如制表符和换行符<br>在文本中定位段落和放置标记<br>选项                      作用<br>{                         在第一列插入 { 来定义一个段落<br>[[                         回到段落的开头处<br>]]                         向前移到下一个段落的开头处<br>m(a-z)                用一个字母来标记当前位置，如用 mz 表示标记 z<br>‘(a-z)                将光标移动到指定的标记，如用 ‘z 表示移动到 z<br>在 vi 中连接行<br>选项                      作用<br>J                     将下一行连接到当前行的末尾<br>nJ                    连接后面 n 行<br>光标放置与屏幕调整<br>选项                      作用<br>H                     将光标移动到屏幕的顶行<br>nH                    将光标移动到屏幕顶行下的第 n 行<br>M                     将光标移动到屏幕的中间<br>L                     将光标移动到屏幕的底行<br>nL                    将光标移动到屏幕底行上的第 n 行<br>^e(ctrl+e)            将屏幕上滚一行<br>ctrl+y                将屏幕下滚一行<br>ctrl+u                将屏幕上滚半页<br>ctrl+d                将屏幕下滚半页<br>ctrl+b                将屏幕上滚一页<br>ctrl+f                将屏幕下滚一页<br>ctrl+l                重绘屏幕<br>z-return              将当前行置为屏幕的顶行<br>nz-return             将当前行下的第 n 行置为屏幕的顶行<br>z.                    将当前行置为屏幕的中央<br>nz.                   将当前行上的第 n 行置为屏幕的中央<br>z-                    将当前行置为屏幕的底行<br>nz-                   将当前行上的第 n 行置为屏幕的底行<br>vi 中的 shell 转义命令<br>选项                      作用<br>:!command             执行 shell 的 command 命令，如 :!ls<br>:!!                         执行前一个 shell 命令<br>:r!command            读取 command 命令的输入并插入，如 :r!ls 会先执行 ls，然后读入内容<br>:w!command            将当前已编辑文件作为 command 命令的标准输入并执行 command 命令，如 :w!grep all<br>:cd directory         将当前工作目录更改为 directory 所表示的目录<br>:sh                   将启动一个子 shell，使用 ^d(ctrl+d) 返回 vi<br>:so file              在 shell 程序 file 中读入和执行命令<br>vi 中的宏与缩写<br>(避免使用控制键和符号，不要使用字符 K、V、g、q、v、*、= 和功能键)<br>选项                      作用<br>:map key command_seq 定义一个键来运行 command_seq，如 :map e ea，无论什么时候都可以 e 移到一个字的末尾来追加文本<br>:map                  在状态行显示所有已定义的宏<br>:umap key             删除该键的宏<br>:ab string1 string2   定义一个缩写，使得当插入 string1 时，用 string2 替换 string1。当要插入文本时，键入 string1 然后按 Esc 键，系统就插入了 string2<br>:ab                   显示所有缩写<br>:una string           取消 string 的缩写<br>在 vi 中缩进文本<br>选项                     作用<br>ctrl+i或 tab     插入文本时，插入移动的宽度，移动宽度是事先定义好的<br>:set ai               打开自动缩进<br>:set sw=n             将移动宽度设置为 n 个字符<br>n&gt;                   使 n 行都向右移动一个宽度，例如 3&gt;&gt; 就将接下来的三行每行都向右移动一个移动宽度</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/vim%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" data-id="ckre6al4g000ppkt41r6a0rk2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-openshift-diy-Apache-php5-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/openshift-diy-Apache-php5-5/" class="article-date">
+  <time datetime="2021-07-21T07:54:51.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/openshift-diy-Apache-php5-5/">openshift diy Apache php5.5</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">OPENSHIFT_RUNTIME_DIR=<span class="variable">$OPENSHIFT_HOMEDIR</span>/app-root/runtime</span><br><span class="line">OPENSHIFT_REPO_DIR=<span class="variable">$OPENSHIFT_HOMEDIR</span>/app-root/runtime/repo</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Prepare directories&quot;</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$OPENSHIFT_RUNTIME_DIR</span></span><br><span class="line">mkdir srv</span><br><span class="line">mkdir srv/pcre</span><br><span class="line">mkdir srv/httpd</span><br><span class="line">mkdir srv/php</span><br><span class="line">mkdir tmp</span><br><span class="line"><span class="built_in">cd</span> tmp/</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Install pcre&quot;</span></span><br><span class="line">wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.33.tar.gz</span><br><span class="line">tar -zxf pcre-8.33.tar.gz</span><br><span class="line"><span class="built_in">cd</span> pcre-8.33</span><br><span class="line">./configure \</span><br><span class="line">--prefix=<span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/pcre</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Install Apache httpd&quot;</span></span><br><span class="line">wget http://www.gtlib.gatech.edu/pub/apache//httpd/httpd-2.4.7.tar.gz</span><br><span class="line">tar -zxf httpd-2.4.7.tar.gz</span><br><span class="line">wget http://artfiles.org/apache.org/apr/apr-1.5.0.tar.gz</span><br><span class="line">tar -zxf apr-1.5.0.tar.gz</span><br><span class="line">mv apr-1.5.0 httpd-2.4.7/srclib/apr</span><br><span class="line">wget http://artfiles.org/apache.org/apr/apr-util-1.5.3.tar.gz</span><br><span class="line">tar -zxf apr-util-1.5.3.tar.gz</span><br><span class="line">mv apr-util-1.5.3 httpd-2.4.7/srclib/apr-util</span><br><span class="line"><span class="built_in">cd</span> httpd-2.4.7</span><br><span class="line">./configure \</span><br><span class="line">--prefix=<span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/httpd \</span><br><span class="line">--with-included-apr \</span><br><span class="line">--with-pcre=<span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/pcre \</span><br><span class="line">--enable-so \</span><br><span class="line">--enable-auth-digest \</span><br><span class="line">--enable-rewrite \</span><br><span class="line">--enable-setenvif \</span><br><span class="line">--enable-mime \</span><br><span class="line">--enable-deflate \</span><br><span class="line">--enable-headers</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="comment">#echo &quot;INSTALL ICU&quot;</span></span><br><span class="line"><span class="comment">#wget http://download.icu-project.org/files/icu4c/50.1/icu4c-50_1-src.tgz</span></span><br><span class="line"><span class="comment">#tar -zxf icu4c-50_1-src.tgz</span></span><br><span class="line"><span class="comment">#cd icu/source/</span></span><br><span class="line"><span class="comment">#chmod +x runConfigureICU configure install-sh</span></span><br><span class="line"><span class="comment">#./configure \</span></span><br><span class="line"><span class="comment">#--prefix=$OPENSHIFT_RUNTIME_DIR/srv/icu/</span></span><br><span class="line"><span class="comment">#make &amp;&amp; make install</span></span><br><span class="line"><span class="comment">#cd ../..</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Install zlib&quot;</span></span><br><span class="line">wget http://zlib.net/zlib-1.2.8.tar.gz</span><br><span class="line">tar -zxf zlib-1.2.8.tar.gz</span><br><span class="line"><span class="built_in">cd</span> zlib-1.2.8</span><br><span class="line">./configure \</span><br><span class="line">--prefix=<span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/zlib/</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;INSTALL PHP&quot;</span></span><br><span class="line">wget http://de2.php.net/get/php-5.5.9.tar.gz/from/this/mirror</span><br><span class="line">tar -zxf php-5.5.9.tar.gz</span><br><span class="line"><span class="built_in">cd</span> php-5.5.9</span><br><span class="line">./configure \</span><br><span class="line">--prefix=<span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/php/ \</span><br><span class="line">--with-config-file-path=<span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/php/etc/apache2 \</span><br><span class="line">--with-apxs2=<span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/httpd/bin/apxs \</span><br><span class="line">--with-zlib=<span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/zlib \</span><br><span class="line">--with-libdir=lib64 \</span><br><span class="line">--with-layout=PHP \</span><br><span class="line">--with-gd \</span><br><span class="line">--with-curl \</span><br><span class="line">--with-mysqli \</span><br><span class="line">--with-openssl \</span><br><span class="line">--enable-mbstring \</span><br><span class="line">--enable-zip</span><br><span class="line"><span class="comment">#--enable-intl \</span></span><br><span class="line"><span class="comment">#--with-icu-dir=$OPENSHIFT_RUNTIME_DIR/srv/icu \</span></span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">mkdir <span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/php/etc/apache2</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="comment">#echo &quot;Install APC&quot;</span></span><br><span class="line"><span class="comment">#wget http://pecl.php.net/get/APC-3.1.13.tgz</span></span><br><span class="line"><span class="comment">#tar -zxf APC-3.1.13.tgz</span></span><br><span class="line"><span class="comment">#cd APC-3.1.13</span></span><br><span class="line"><span class="comment">#$OPENSHIFT_RUNTIME_DIR/srv/php/bin/phpize</span></span><br><span class="line"><span class="comment">#./configure \</span></span><br><span class="line"><span class="comment">#--with-php-config=$OPENSHIFT_RUNTIME_DIR/srv/php/bin/php-config \</span></span><br><span class="line"><span class="comment">#--enable-apc \</span></span><br><span class="line"><span class="comment">#--enable-apc-debug=no</span></span><br><span class="line"><span class="comment">#make &amp;&amp; make install</span></span><br><span class="line"><span class="comment">#cd ..</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Install xdebug&quot;</span></span><br><span class="line">wget http://xdebug.org/files/xdebug-2.2.3.tgz</span><br><span class="line">tar -zxf xdebug-2.2.3.tgz</span><br><span class="line"><span class="built_in">cd</span> xdebug-2.2.3</span><br><span class="line"><span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/php/bin/phpize</span><br><span class="line">./configure \</span><br><span class="line">--with-php-config=<span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/php/bin/php-config</span><br><span class="line">make &amp;&amp; cp modules/xdebug.so <span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/php/lib/php/extensions</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Cleanup&quot;</span></span><br><span class="line">rm -r <span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/tmp/*.tar.gz</span><br><span class="line">rm -r <span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/tmp/*.tgz</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;COPY TEMPLATES&quot;</span></span><br><span class="line">cp <span class="variable">$OPENSHIFT_REPO_DIR</span>/misc/templates/bash_profile.tpl <span class="variable">$OPENSHIFT_HOMEDIR</span>/app-root/data/.bash_profile</span><br><span class="line">python <span class="variable">$OPENSHIFT_REPO_DIR</span>/misc/parse_templates.py</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;START APACHE&quot;</span></span><br><span class="line"><span class="variable">$OPENSHIFT_RUNTIME_DIR</span>/srv/httpd/bin/apachectl start</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;*****************************&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;***  F I N I S H E D !!   ***&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;*****************************&quot;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/openshift-diy-Apache-php5-5/" data-id="ckre6al4a000jpkt4fki6h0v7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Openshift常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/Openshift%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2021-07-21T07:53:26.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/Openshift%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Openshift常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>检测本地环境配置：rhc-chk<br>显示用户信息： rhc-user-info</p>
+<p>创建个人域 ：rhc-create-domain ：  </p>
+<p>创建应用：rhc-create-app </p>
+<p>应用控制，可以开始、停止、重起应用。还可以添加mysql数据库等： rhc-ctl-app</p>
+<p>应用备份：rhc-snapshot</p>
+<p>查看应用日志：rhc-tail-files</p>
+<p>登录:openshift: rhc setup</p>
+<p>创建php应用: rhc app create -a <app_name>-t php-5.3</p>
+<p>创建wordpress： rhc app create -a wordpress -t php-5.3</p>
+<p>wordpress添加mysql支持：rhc app cartridge add -a wordpress -c mysql-5.1</p>
+<p>创建一个自定义应用：rhc-create-app -a <app_name>-t diy-0.1</p>
+<p>创建命名空间：rhc domain create -n mydomain -l rhlogin</p>
+<p>创建phpmyadmin：rhc app cartridge add -a <app_name>-c phpmyadmin-3.4</p>
+<p>绑定域名:rhc alias add appname domian</p>
+<p>删除绑定域名: rhc alias removeappname domian</p>
+<p>如果你是创建一个wordpress，需要MongoDB支持，可以输入如下命令：rhc app cartridge add -a wordpress -c mongodb-2.2</p>
+<p>Openshift程序控制，需要ssh到openshift<br>ctl_app<br>启动应用程序：ctl_app start<br>停止应用程序：ctl_app stop<br>重启应用程序：ctl_app restart<br>查看应用程序：ctl_app status</p>
+<p>或者</p>
+<p>ctl_all<br>启动应用程序：ctl_all start<br>停止应用程序：ctl_all stop<br>重启应用程序：ctl_all restart<br>查看应用程序：ctl_all status</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/Openshift%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="ckre6al3u0005pkt469iran4y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-c4配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/c4%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2021-07-21T07:52:26.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/c4%E9%85%8D%E7%BD%AE/">c4配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>主要需要修改gsnova.conf，以下针对各个PaaS平台部署后配置说明</p>
+<p>C4<br>修改gsnova.conf中[C4]以下部分，默认Enable为0，开启需要修改Enable为1：</p>
+<p>[C4] Enable=1 WorkerNode[0]=myapp.cloudfoundry.com<br>将申请的域名填入WorkerNode[0]=后，注意必须为域名，且在配置前请确保在浏览器中输入此域名能看到‘snova’相关信息（证明部署服务端成功且能直接访问）。若有多个，可以如下配置多个：</p>
+<p>[C4] Enable=1 WorkerNode[0]=myapp1.cloudfoundry.comWorkerNode[1]=myapp2.cloudfoundry.com<br>域名前可以增加scheme指示连接协议类型， 默认为http， gsnova支持如下几种协议：</p>
+<p>WorkerNode[0]=<a target="_blank" rel="noopener" href="http://myapp1.cloudfoundry.com/">http://myapp1.cloudfoundry.com</a><br>WorkerNode[0]=<a target="_blank" rel="noopener" href="https://myapp1.cloudfoundry/">https://myapp1.cloudfoundry</a>.<br>comWorkerNode[0]=ws://myapp1.cloudfoundry.com //websocket， 服务端仅nodejs支持WorkerNode[0]=wss://myapp1.cloudfoundry.com //websocket over ssl， 服务端仅nodejs支持<br>此Proxy实现在SPAC中名称为C4, 若想只用C4作为唯一的Proxy实现，修改[SPAC]下的Default值为C4或者更改代理默认端口为48102</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/c4%E9%85%8D%E7%BD%AE/" data-id="ckre6al41000bpkt4fzti0vvg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-在Openshift搭建Java-blog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/%E5%9C%A8Openshift%E6%90%AD%E5%BB%BAJava-blog/" class="article-date">
+  <time datetime="2021-07-21T07:49:27.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/21/%E5%9C%A8Openshift%E6%90%AD%E5%BB%BAJava-blog/">在Openshift搭建Java blog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="1-创建一个Java-Jboss7-应用"><a href="#1-创建一个Java-Jboss7-应用" class="headerlink" title="1. 创建一个Java Jboss7 应用"></a>1. 创建一个Java Jboss7 应用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rhc app create MyApp jbossas-7$ rhc cartridge add mysql-5.1 -a MyApp</span><br></pre></td></tr></table></figure>
+<p>如果创建成功的话，就会提示你用git clone你的源代码。</p>
+<h3 id="2-创建一个mysql"><a href="#2-创建一个mysql" class="headerlink" title="2. 创建一个mysql"></a>2. 创建一个mysql</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rhc cartridge add mysql-5.1 -a MyApp</span><br></pre></td></tr></table></figure>
+<h3 id="3-得到数据库信息"><a href="#3-得到数据库信息" class="headerlink" title="3. 得到数据库信息"></a>3. 得到数据库信息</h3><p>用 rhc app show myApp. 得到你app的信息。</p>
+<p>用ssh登录到你的vps上，执行以下命令来得到你数据库ip和端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$echo</span> <span class="variable">$DB_IPADDRESS</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-配置b3log"><a href="#4-配置b3log" class="headerlink" title="4. 配置b3log"></a>4. 配置b3log</h3><p>可以b3log mysql版本参考文档</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h3 id="1-在你app-git-库删除-pom-xml-src-运行："><a href="#1-在你app-git-库删除-pom-xml-src-运行：" class="headerlink" title="1. 在你app git 库删除 pom.xml src, 运行："></a>1. 在你app git 库删除 pom.xml src, 运行：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rm pom.xm  src</span><br></pre></td></tr></table></figure>
+<h3 id="2-把已经配置好了的-b3log-mysql-上传到-app-git-下的-deployments目录下，并且改名为ROOT-war-执行以下命令来部署。"><a href="#2-把已经配置好了的-b3log-mysql-上传到-app-git-下的-deployments目录下，并且改名为ROOT-war-执行以下命令来部署。" class="headerlink" title="2. 把已经配置好了的 b3log-mysql 上传到 app-git 下的 deployments目录下，并且改名为ROOT.war. 执行以下命令来部署。"></a>2. 把已经配置好了的 b3log-mysql 上传到 app-git 下的 deployments目录下，并且改名为ROOT.war. 执行以下命令来部署。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"><span class="variable">$git</span> commit</span><br><span class="line"></span><br><span class="line"><span class="variable">$git</span> push</span><br></pre></td></tr></table></figure>
+<p>在执行git push时， 会从前jboss程序。</p>
+<p>你的应用已经部署好了。</p>
+<p>rhcloud.com被墙了，你只有把自己的域名绑定了，才能够访问你的应用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/%E5%9C%A8Openshift%E6%90%AD%E5%BB%BAJava-blog/" data-id="ckre6al4e000npkt4ds8l84kp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页 &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/21/asar-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8C%85/">asar 打包和解包</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/">Xterm/Uxterm配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Windows-%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">Windows 一些问题处理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/linux-selinux%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9D%97%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">linux selinux手动编译模块相关命令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/zabbix-trigger%E7%9A%84%E5%9D%91/">zabbix trigger的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 xiangyu chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

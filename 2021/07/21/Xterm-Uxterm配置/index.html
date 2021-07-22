@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Xterm/Uxterm配置 | chenxyzy的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="右击粘贴： 1234*VT100.Translations: #override\~Ctrl ~Meta &lt;Btn3Down&gt;:ignore() \n\~Meta &lt;Btn3Motion&gt;:ignore() \n\~Ctrl ~Meta &lt;Btn3Up&gt;:insert-selection(PRIMARY, CUT_BUFFER0) 解决不能从其他软件复制粘贴：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xterm&#x2F;Uxterm配置">
+<meta property="og:url" content="http://example.com/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="chenxyzy的博客">
+<meta property="og:description" content="右击粘贴： 1234*VT100.Translations: #override\~Ctrl ~Meta &lt;Btn3Down&gt;:ignore() \n\~Meta &lt;Btn3Motion&gt;:ignore() \n\~Ctrl ~Meta &lt;Btn3Up&gt;:insert-selection(PRIMARY, CUT_BUFFER0) 解决不能从其他软件复制粘贴：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-21T08:58:25.000Z">
+<meta property="article:modified_time" content="2021-07-21T09:00:02.655Z">
+<meta property="article:author" content="xiangyu chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="chenxyzy的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">chenxyzy的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Xterm-Uxterm配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time datetime="2021-07-21T08:58:25.000Z" itemprop="datePublished">2021-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Xterm/Uxterm配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>右击粘贴：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*VT100.Translation<span class="variable">s:</span> #override\</span><br><span class="line">~Ctrl ~Meta <span class="symbol">&lt;Btn3Down&gt;</span>:ignore() \n\</span><br><span class="line">~Meta <span class="symbol">&lt;Btn3Motion&gt;</span>:ignore() \n\</span><br><span class="line">~Ctrl ~Meta <span class="symbol">&lt;Btn3Up&gt;</span>:<span class="keyword">insert</span>-selection(PRIMARY, CUT_BUFFER0)</span><br></pre></td></tr></table></figure>
+<p>解决不能从其他软件复制粘贴：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xterm*selectToClipboard:true</span><br></pre></td></tr></table></figure>
+
+
+<p>中文显示：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xterm*faceNameDoublesize:Microsoft YaHei UI:pixelsize=<span class="number">18</span>:antialias=true</span><br></pre></td></tr></table></figure>
+<p>加载配置文件：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xrdb ~/.Xresources</span><br></pre></td></tr></table></figure>
+<p>默认复制粘贴：<br>Shift + Insert 粘贴<br>选中即为复制</p>
+<p>查看系统安装的字体：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fc-list :lang=zh</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">!|<span class="keyword">vim</span> ~/.Xresources                                                                                                                                                </span><br><span class="line">!|                                                                                             </span><br><span class="line">!                                                                                          </span><br><span class="line">!|!xterm font <span class="built_in">and</span> locale                                                                                                                                                     </span><br><span class="line">xterm.locale:true                                                                                                                                          </span><br><span class="line">xterm.utf8: true                                                                                                                                       </span><br><span class="line">xterm*utf8Title:true                                                                                                                                                   </span><br><span class="line">xterm*fontMenu*fontdefault*Labe<span class="variable">l:Default</span>                                                                                                                                     </span><br><span class="line">!斜体                                                                                                      </span><br><span class="line">!xterm*faceName:Consola<span class="variable">s:antialias</span>=true:pixelsize=<span class="number">18</span>:italic                                                                                                                  </span><br><span class="line">xterm*faceName:Consola<span class="variable">s:antialias</span>=true:pixelsize=<span class="number">18</span>                                                                                                                          </span><br><span class="line">!斜体                                                                                                      </span><br><span class="line">!xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:pixelsize=<span class="number">18</span>:antialias=true:italic                                                                                        </span><br><span class="line">!xterm*faceNameDoublesize:WenQuanYi Micro Hei Mono:pixelsize=<span class="number">18</span>:antialias=true                                                                                               </span><br><span class="line">xterm*faceNameDoublesize:Microsoft YaHei UI:pixelsize=<span class="number">18</span>:antialias=true                                                                                                      </span><br><span class="line">xterm*xftAntialia<span class="variable">s:true</span>                                                                                                                                                      </span><br><span class="line">xterm*cjkWidth:false                                                                                                                                                   </span><br><span class="line">xterm*background:black                                                                                                                                                       </span><br><span class="line">xterm*<span class="built_in">foreground</span>:green                                                                                                                                                       </span><br><span class="line">xterm*color0: #<span class="number">000000</span>                                                                                                                                                      </span><br><span class="line">xterm*color1: #CC0000                                                                                                                                                      </span><br><span class="line">xterm*color2: #<span class="number">4</span>E9A06                                                                                                                                                      </span><br><span class="line">xterm*color3: #C4A000</span><br><span class="line">xterm*color4: #<span class="number">3465</span>A4</span><br><span class="line">xterm*color5: #<span class="number">75507</span>B</span><br><span class="line">xterm*color6: #<span class="number">06989</span>A</span><br><span class="line">xterm*color7: #D3D7CF</span><br><span class="line">xterm*color8: #<span class="number">555753</span></span><br><span class="line">xterm*color9: #EF2929</span><br><span class="line">xterm*color10: #<span class="number">8</span>AE234</span><br><span class="line">xterm*color11: #FCE94F</span><br><span class="line">xterm*color12: #<span class="number">729</span>FCF</span><br><span class="line">xterm*color13: #AD7FA8</span><br><span class="line">xterm*color14: #<span class="number">34</span>E2E2</span><br><span class="line">xterm*color15: #EEEEEC</span><br><span class="line">!</span><br><span class="line">!解决Alt键不好使</span><br><span class="line">xterm*eightBitInpu<span class="variable">t:false</span></span><br><span class="line">xterm*altSendsEscape:true</span><br><span class="line">!</span><br><span class="line">xterm*selectToClipboard:true</span><br><span class="line">!</span><br><span class="line">*VT100.Translation<span class="variable">s:</span> #override\</span><br><span class="line">~Ctrl ~Meta <span class="symbol">&lt;Btn3Down&gt;</span>:ignore() \n\</span><br><span class="line">~Meta <span class="symbol">&lt;Btn3Motion&gt;</span>:ignore() \n\</span><br><span class="line">~Ctrl ~Meta <span class="symbol">&lt;Btn3Up&gt;</span>:<span class="keyword">insert</span>-selection(CLIPBOARD, PRIMARY, CUT_BUFFER1)</span><br><span class="line">!~Ctrl ~Meta <span class="symbol">&lt;Btn3Up&gt;</span>:<span class="keyword">insert</span>-selection(PRIMARY, CUT_BUFFER0)</span><br><span class="line">!解决复制问题</span><br><span class="line">!*VT100*translation<span class="variable">s:</span> #override \n\</span><br><span class="line">!Shift <span class="symbol">&lt;KeyPress&gt;</span> Inser<span class="variable">t:insert</span>-selection(CLIPBOARD, CUT_BUFFER1) \n\</span><br><span class="line">!~Shift~Ctrl<span class="symbol">&lt;Btn2Up&gt;</span>: <span class="keyword">insert</span>-selection(PRIMARY, CUT_BUFFER0) \n\</span><br><span class="line">!~Shift<span class="symbol">&lt;BtnUp&gt;</span>: select-end(CLIPBOARD, CUT_BUFFER1) \n\</span><br><span class="line">!~Shift<span class="symbol">&lt;BtnUp&gt;</span>: select-end(PRIMARY, CUT_BUFFER0)</span><br><span class="line">!|</span><br><span class="line">!</span><br><span class="line">!</span><br><span class="line">!|xrdb -merge ~/.Xresources</span><br><span class="line">!|</span><br><span class="line">!</span><br><span class="line">!在|~/.xinitrc|配置文件中配置下，下次重启就不用手动加载了</span><br><span class="line">!</span><br><span class="line">!|#!/bin/bash</span><br><span class="line">!</span><br><span class="line">!export GTK_IM_MODULE=fcitx</span><br><span class="line">!export QT_IM_MODULE=fcitx</span><br><span class="line">!export XMODIFIERS=<span class="string">&quot;@im=fcitx&quot;</span></span><br><span class="line">!fcitx &amp;</span><br><span class="line">!xrdb -merge ~/.Xresources</span><br><span class="line">!exec awesome</span><br></pre></td></tr></table></figure>
+<p>参考：<a target="_blank" rel="noopener" href="https://omelchenko.as/">https://omelchenko.as/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/" data-id="ckre6al3y0009pkt4ed9a4xzg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/21/asar-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8C%85/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          asar 打包和解包
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/21/Windows-%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Windows 一些问题处理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/21/asar-%E6%89%93%E5%8C%85%E5%92%8C%E8%A7%A3%E5%8C%85/">asar 打包和解包</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Xterm-Uxterm%E9%85%8D%E7%BD%AE/">Xterm/Uxterm配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/Windows-%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/">Windows 一些问题处理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/linux-selinux%E6%89%8B%E5%8A%A8%E7%BC%96%E8%AF%91%E6%A8%A1%E5%9D%97%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">linux selinux手动编译模块相关命令</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/21/zabbix-trigger%E7%9A%84%E5%9D%91/">zabbix trigger的坑</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 xiangyu chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
